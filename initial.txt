@@ -1,3 +1,9 @@
 // running ksqldb server CLI
 sudo docker-compose exec ksqldb-cli ksql http://ksqldb-server:8088
-ee
+
+// running ksql users data generator 
+sudo docker-compose run --rm --name datagen-users1 ksql-datagen   ksql-datagen     bootstrap-server=broker:9092     quickstart=users     format=json     topic=workshop-u
+sers     maxInterval=250
+
+// checking connectors
+curl localhost:8083/connectors

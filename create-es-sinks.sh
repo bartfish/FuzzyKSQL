@@ -1,0 +1,33 @@
+
+# Basic elastic search sink for kafka
+
+curl -X "POST" "http://localhost:8083/connectors/" \
+     -H "Content-Type: application/json" \
+     -d '{
+  "name": "sink_elastic_DEFAULT",
+  "config": {
+    "connector.class": "io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
+    "connection.url": "http://elasticsearch:9200",
+    "type.name": "ksql-workshop",
+    "tasks.max": "1",
+    "schema.ignore": "true",
+    "topics": "WORSHOP_USERS",
+    "write.method": "upsert"
+  }
+}'
+
+
+curl -X "POST" "http://localhost:8083/connectors/" \
+     -H "Content-Type: application/json" \
+     -d '{
+  "name": "sink_elastic_DEFAULT1",
+  "config": {
+    "connector.class": "io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
+    "connection.url": "http://elasticsearch:9200",
+    "type.name": "ksql-workshop",
+    "tasks.max": "1",
+    "schema.ignore": "true",
+    "topics": "workshop-users",
+    "write.method": "upsert"
+  }
+}'

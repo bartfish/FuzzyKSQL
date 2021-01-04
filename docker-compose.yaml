@@ -124,3 +124,26 @@ services:
       KSQL_CONFIG_DIR: '/etc/ksql'
       KSQL_LOG4J_OPTS: '-Dlog4j.configuration=file:/etc/ksql/log4j-rolling.properties'
       STREAMS_BOOTSTRAP_SERVERS: broker:9092
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.2
+    hostname: elasticsearch
+    container_name: elasticsearch
+    ports:
+      - '9200:9200'
+      - '9300:9300'
+    environment:
+      - discovery.type=single-node
+    volumes:
+     - $PWD/scripts:/scripts
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.6.2
+    hostname: kibana
+    container_name: kibana
+    ports:
+      - '5601:5601'
+    depends_on:
+      - elasticsearch
+    volumes:
+     - $PWD/scripts:/scripts
