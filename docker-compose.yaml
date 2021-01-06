@@ -97,6 +97,7 @@ services:
       # Configuration for UDFs
       KSQL_KSQL_EXTENSION_DIR: "/opt/ksqldb-udfs"
       KSQL_KSQL_FUNCTIONS_FORMULA_BASE_VALUE: 5
+      KSQL_KSQL_CONNECT_URL: "http://connect:8083"
 
   ksqldb-cli:
     image: confluentinc/ksqldb-cli:0.14.0
