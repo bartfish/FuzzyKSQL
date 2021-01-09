@@ -13,13 +13,11 @@ import java.util.concurrent.ExecutionException;
 
 public class ProducerAGV {
 
-    public void Producer() throws ExecutionException, InterruptedException {
+    public static void Producer() throws ExecutionException, InterruptedException {
         Properties props = new Properties();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
-                "org.apache.kafka.common.serialization.StringSerializer");
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
-                "io.confluent.kafka.serializers.json.KafkaJsonSchemaSerializer");
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, "io.confluent.kafka.serializers.json.KafkaJsonSchemaSerializer");
         props.put("schema.registry.url", "http://localhost:8081");
 
         Producer<String, AutonomousGuidedVehicle> producer = new KafkaProducer<String, AutonomousGuidedVehicle>(props);
@@ -35,7 +33,7 @@ public class ProducerAGV {
         agv.batteryPercentageLeft = 5.0; // 0 - 100 (battery lasting percentage)
 
         ProducerRecord<String, AutonomousGuidedVehicle> record
-                = new ProducerRecord<String, AutonomousGuidedVehicle>(topic, key, AutonomousGuidedVehicle);
+                = new ProducerRecord<String, AutonomousGuidedVehicle>(topic, key, agv);
         producer.send(record).get();
         producer.close();
     }
