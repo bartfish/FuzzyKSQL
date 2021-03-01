@@ -11,6 +11,8 @@ import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.Random;
+
 
 public class ProducerAGV {
 
@@ -42,15 +44,17 @@ public class ProducerAGV {
             TimerTask task = new TimerTask() {
                 @Override
                 public void run()  {
+
+                    Random rand = new Random();
                   // task to run goes here
                 //   System.out.println("Hello !!!");
                     AutonomousGuidedVehicle agv = new AutonomousGuidedVehicle();
-                    agv.traction = 5.0; // 0 - 100
-                    agv.latitude = 5.00100000000; // 50.0000001
-                    agv.longtitute = 5.0; // 50.0000001
+                    agv.traction = rand.nextDouble();; // 0 - 100
+                    agv.latitude = rand.nextDouble(); // 50.0000001
+                    agv.longtitute = rand.nextDouble(); // 50.0000001
                     agv.machineState = "STANDBY"; // STANDBY, WORKING, BROKEN, LOST_CONNECTION, LOST
-                    agv.humidity = 5.0; // 0 - 10 (0 means dry, 10 means a lot of water)
-                    agv.batteryPercentageLeft = 5.0; // 0 - 100 (battery lasting percentage)
+                    agv.humidity = rand.nextDouble(); // 0 - 10 (0 means dry, 10 means a lot of water)
+                    agv.batteryPercentageLeft = rand.nextDouble(); // 0 - 100 (battery lasting percentage)
 
                     ProducerRecord<String, AutonomousGuidedVehicle> record
                             = new ProducerRecord<String, AutonomousGuidedVehicle>(topic, key, agv);
