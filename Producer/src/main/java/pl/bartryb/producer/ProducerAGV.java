@@ -9,6 +9,8 @@ import pl.bartryb.producer.models.AutonomousGuidedVehicle;
 
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ProducerAGV {
 
@@ -22,20 +24,47 @@ public class ProducerAGV {
 
             KafkaProducer<String, AutonomousGuidedVehicle> producer = new KafkaProducer<>(props);
 
-            String topic = "testjsonschema";
+            String topic = "AGV_1";
             String key = "testkey";
-            AutonomousGuidedVehicle agv = new AutonomousGuidedVehicle();
-            agv.traction = 5.0; // 0 - 100
-            agv.latitude = 5.00100000000; // 50.0000001
-            agv.longtitute = 5.0; // 50.0000001
-            agv.machineState = "STANDBY"; // STANDBY, WORKING, BROKEN, LOST_CONNECTION, LOST
-            agv.humidity = 5.0; // 0 - 10 (0 means dry, 10 means a lot of water)
-            agv.batteryPercentageLeft = 5.0; // 0 - 100 (battery lasting percentage)
+            // AutonomousGuidedVehicle agv = new AutonomousGuidedVehicle();
+            // agv.traction = 5.0; // 0 - 100
+            // agv.latitude = 5.00100000000; // 50.0000001
+            // agv.longtitute = 5.0; // 50.0000001
+            // agv.machineState = "STANDBY"; // STANDBY, WORKING, BROKEN, LOST_CONNECTION, LOST
+            // agv.humidity = 5.0; // 0 - 10 (0 means dry, 10 means a lot of water)
+            // agv.batteryPercentageLeft = 5.0; // 0 - 100 (battery lasting percentage)
 
-            ProducerRecord<String, AutonomousGuidedVehicle> record
-                    = new ProducerRecord<String, AutonomousGuidedVehicle>(topic, key, agv);
-            producer.send(record).get();
-            producer.close();
+            // ProducerRecord<String, AutonomousGuidedVehicle> record
+            //         = new ProducerRecord<String, AutonomousGuidedVehicle>(topic, key, agv);
+            // producer.send(record).get();
+            // producer.close();
+
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run()  {
+                  // task to run goes here
+                //   System.out.println("Hello !!!");
+                    AutonomousGuidedVehicle agv = new AutonomousGuidedVehicle();
+                    agv.traction = 5.0; // 0 - 100
+                    agv.latitude = 5.00100000000; // 50.0000001
+                    agv.longtitute = 5.0; // 50.0000001
+                    agv.machineState = "STANDBY"; // STANDBY, WORKING, BROKEN, LOST_CONNECTION, LOST
+                    agv.humidity = 5.0; // 0 - 10 (0 means dry, 10 means a lot of water)
+                    agv.batteryPercentageLeft = 5.0; // 0 - 100 (battery lasting percentage)
+
+                    ProducerRecord<String, AutonomousGuidedVehicle> record
+                            = new ProducerRecord<String, AutonomousGuidedVehicle>(topic, key, agv);
+                    producer.send(record).get();
+                }
+              };
+              Timer timer = new Timer();
+              long delay = 0;
+              long intevalPeriod = 1 * 1000; 
+              
+              // schedules the task to be run in an interval 
+              timer.scheduleAtFixedRate(task, delay,
+                                          intevalPeriod);
+                                          
         } catch (Exception e) {
             System.out.println("Message: " + e.getMessage() + " StackTrace: " + e.getStackTrace().toString());
         }
