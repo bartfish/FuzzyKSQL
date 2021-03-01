@@ -54,7 +54,13 @@ public class ProducerAGV {
 
                     ProducerRecord<String, AutonomousGuidedVehicle> record
                             = new ProducerRecord<String, AutonomousGuidedVehicle>(topic, key, agv);
-                    producer.send(record).get();
+                    try {
+                        producer.send(record).get();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
                 }
               };
               Timer timer = new Timer();
