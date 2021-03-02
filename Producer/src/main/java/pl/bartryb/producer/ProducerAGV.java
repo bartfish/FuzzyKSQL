@@ -7,14 +7,13 @@ import org.apache.kafka.common.serialization.LongSerializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import pl.bartryb.producer.models.AutonomousGuidedVehicle;
 
-import java.util.Properties;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.Random;
 
 
 public class ProducerAGV {
+
+    private static List<String> machineStates = Arrays.asList(new String[] { "STANDBY", "WORKING", "BROKEN", "OFFLINE"});
 
     public static void KSProducer() throws ExecutionException, InterruptedException {
         try {
@@ -28,18 +27,6 @@ public class ProducerAGV {
 
             String topic = "AGV_1";
             String key = "testkey";
-            // AutonomousGuidedVehicle agv = new AutonomousGuidedVehicle();
-            // agv.traction = 5.0; // 0 - 100
-            // agv.latitude = 5.00100000000; // 50.0000001
-            // agv.longtitute = 5.0; // 50.0000001
-            // agv.machineState = "STANDBY"; // STANDBY, WORKING, BROKEN, LOST_CONNECTION, LOST
-            // agv.humidity = 5.0; // 0 - 10 (0 means dry, 10 means a lot of water)
-            // agv.batteryPercentageLeft = 5.0; // 0 - 100 (battery lasting percentage)
-
-            // ProducerRecord<String, AutonomousGuidedVehicle> record
-            //         = new ProducerRecord<String, AutonomousGuidedVehicle>(topic, key, agv);
-            // producer.send(record).get();
-            // producer.close();
 
             TimerTask task = new TimerTask() {
                 @Override
@@ -52,7 +39,7 @@ public class ProducerAGV {
                     agv.traction = rand.nextDouble();; // 0 - 100
                     agv.latitude = rand.nextDouble(); // 50.0000001
                     agv.longtitute = rand.nextDouble(); // 50.0000001
-                    agv.machineState = "STANDBY"; // STANDBY, WORKING, BROKEN, LOST_CONNECTION, LOST
+                    agv.machineState = machineStates.get(rand.nextInt(3)); // STANDBY, WORKING, BROKEN, LOST_CONNECTION, LOST
                     agv.humidity = rand.nextDouble(); // 0 - 10 (0 means dry, 10 means a lot of water)
                     agv.batteryPercentageLeft = rand.nextDouble(); // 0 - 100 (battery lasting percentage)
 
