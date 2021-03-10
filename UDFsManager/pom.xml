@@ -88,7 +88,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>${exec.mainClass}</mainClass>
+                            <mainClass>pl.bartryb.MultiplyUdf</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
