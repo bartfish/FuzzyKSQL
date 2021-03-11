@@ -91,7 +91,7 @@ services:
     ports:
       - "8088:8088"
     volumes:
-      - "./extensions/:/opt/ksqldb-udfs"
+      - ./extensions:/etc/ksqldb/ext
     environment:
       KSQL_LISTENERS: "http://0.0.0.0:8088"
       KSQL_BOOTSTRAP_SERVERS: "broker:29092"
@@ -99,9 +99,16 @@ services:
       KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: "true"
       KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE: "true"
       # Configuration for UDFs
-      KSQL_KSQL_EXTENSION_DIR: "/opt/ksqldb-udfs"
+      KSQL_CONFIG_DIR: "/etc/ksqldb"
+      KSQL_KSQL_EXTENSION_DIR: "/etc/ksqldb/ext/"
+      # KSQL_KSQL_EXTENSION_DIR: "/opt/ksqldb-udfs/"
+      KSQL_LOG4J_OPTS: "-Dlog4j.configuration=file:/etc/ksqldb/log4j.properties"
       KSQL_KSQL_FUNCTIONS_FORMULA_BASE_VALUE: 5
       KSQL_KSQL_CONNECT_URL: "http://connect:8083"
+      KSQL_LOG4J_PROCESSING_LOG_TOPIC: "KSQL_PROCESSING_LOG"
+      KSQL_KSQL_LOGGING_PROCESSING_TOPIC_NAME: "KSQL_PROCESSING_LOG"
+      KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE: "true"
+      KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: "true"
 
   ksqldb-cli:
     image: confluentinc/ksqldb-cli:0.14.0

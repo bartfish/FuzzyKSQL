@@ -4,3 +4,8 @@
 ./target
 Producer/target/
 UdfsManager/target/
+UDFsManager/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+UDFsManager/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+UDFsManager/target/classes/pl/bartryb/MultiplyUdf.class
+UDFsManager/target/UdfsManager-1.0-SNAPSHOT.jar
+UDFsManager/target/UdfsManager-1.0-SNAPSHOT-jar-with-dependencies.jar
