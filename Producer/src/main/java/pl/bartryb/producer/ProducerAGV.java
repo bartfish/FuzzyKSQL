@@ -16,7 +16,7 @@ public class ProducerAGV {
 
     private static List<String> machineStates = Arrays.asList(new String[] { "STANDBY", "WORKING", "BROKEN", "OFFLINE"});
     private static List<String> weightUnits = Arrays.asList(new String[]
-            { "kg", "kilogram", "KG", "kilogr", "gram", "ml", "l"});
+            { "kg", "kilogram", "KG", "kilogr", "kil", "kilo", "kilog", "gram", "ml", "mili", "l", "liters"});
 
     private static void defineStream1(KafkaProducer<String, AutonomousGuidedVehicle> producer, String topic, String key) {
         TimerTask task = new TimerTask() {
@@ -33,6 +33,7 @@ public class ProducerAGV {
                 agv.machineState = machineStates.get(rand.nextInt(3)); // STANDBY, WORKING, BROKEN, LOST_CONNECTION, LOST
                 agv.humidity = rand.nextDouble(); // 0 - 10 (0 means dry, 10 means a lot of water)
                 agv.batteryPercentageLeft = rand.nextDouble(); // 0 - 100 (battery lasting percentage)
+                agv.weightUnit = weightUnits.get(rand.nextInt(weightUnits.size() - 1));
 
                 ProducerRecord<String, AutonomousGuidedVehicle> record
                         = new ProducerRecord<String, AutonomousGuidedVehicle>(topic, key, agv);
@@ -70,7 +71,7 @@ public class ProducerAGV {
                 agv.humidity = rand.nextDouble(); // 0 - 10 (0 means dry, 10 means a lot of water)
                 agv.batteryPercentageLeft = rand.nextDouble(); // 0 - 100 (battery lasting percentage)
                 agv.weightValue =  rand.nextDouble();
-                agv.weightUnit = weightUnits.get(rand.nextInt(weightUnits.size() - 1 ));
+                agv.weightUnit = weightUnits.get(rand.nextInt(weightUnits.size() - 1));
 
                 ProducerRecord<String, AutonomousGuidedVehicleOther> record
                         = new ProducerRecord<String, AutonomousGuidedVehicleOther>(topic, key, agv);

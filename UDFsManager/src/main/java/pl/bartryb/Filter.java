@@ -1,15 +1,14 @@
 package pl.bartryb;
 
 import io.confluent.ksql.function.udf.Udf;
-import io.confluent.ksql.function.udf.UdfDescription;
 import io.confluent.ksql.function.udf.UdfParameter;
+import io.confluent.ksql.function.udf.UdfDescription;
 
 import java.util.Arrays;
 import java.util.OptionalDouble;
 
-@UdfDescription(name = "multiply", description = "multiplies 2 numbers")
+@UdfDescription(name = "fuzzyfiltering", description = "joins fuzzy strings")
 public class Filter {
-
 
     /// LEVENSTEIN
     private static int costOfSubstitution(char a, char b) {
@@ -21,7 +20,7 @@ public class Filter {
                 .min().orElse(Integer.MAX_VALUE);
     }
 
-    private Integer calculateDistance(String x, String y) {
+    private int calculateDistance(String x, String y) {
         int[][] dp = new int[x.length() + 1][y.length() + 1];
 
         for (int i = 0; i <= x.length(); i++) {
@@ -46,7 +45,7 @@ public class Filter {
     /// /LEVENSTEIN
 
     @Udf(description = "compare 2 strings")
-    public Integer fuzzy_filtering(
+    public int fuzzyfiltering(
             @UdfParameter(value = "V1", description = "the first value") final String v1,
             @UdfParameter(value = "V2", description = "the second value") final String v2) {
         return calculateDistance(v1, v2);

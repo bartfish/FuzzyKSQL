@@ -24,5 +24,8 @@ public class AutonomousGuidedVehicle {
     @JsonProperty
     public Double humidity;
 
+    @JsonProperty 
+    public String weightUnit;
+
 
 }

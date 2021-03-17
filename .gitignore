@@ -9,3 +9,4 @@ UDFsManager/target/maven-status/maven-compiler-plugin/compile/default-compile/cr
 UDFsManager/target/classes/pl/bartryb/MultiplyUdf.class
 UDFsManager/target/UdfsManager-1.0-SNAPSHOT.jar
 UDFsManager/target/UdfsManager-1.0-SNAPSHOT-jar-with-dependencies.jar
+*.jar
