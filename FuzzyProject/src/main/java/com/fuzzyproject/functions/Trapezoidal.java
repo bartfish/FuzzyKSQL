@@ -11,7 +11,7 @@ public class Trapezoidal {
     // "TR_RIGHT;RIGHT;RIGHT_TOP;VALUE"
     // "TR_RIGHT;0.5;3;4"
 
-    public double TrapezoidalFunction(Double left, Double leftTop, Double rightTop, Double right, Double xValue) {
+    public static double TrapezoidalFunction(Double left, Double leftTop, Double rightTop, Double right, Double xValue) {
 
         if (xValue < left || xValue > right) {
             return 0;
@@ -24,7 +24,7 @@ public class Trapezoidal {
             return nominator/denominator;
         }
 
-        if (xValue <= leftTop && xValue >= rightTop) {
+        if (xValue >= leftTop && xValue <= rightTop) {
             return 1;
         }
 
@@ -39,7 +39,7 @@ public class Trapezoidal {
 
     }
 
-    public double TrapezoidalRight( Double right, Double rightTop, Double xValue) {
+    public static double TrapezoidalRight(Double rightTop, Double right, Double xValue) {
 
         if (xValue > right) {
             return 0;
@@ -57,7 +57,7 @@ public class Trapezoidal {
         return 0;
     }
 
-    public double TrapezoidalLeft(Double leftTop, Double left, Double xValue) {
+    public static double TrapezoidalLeft(Double left, Double leftTop, Double xValue) {
         if (xValue < left) {
             return 0;
         }

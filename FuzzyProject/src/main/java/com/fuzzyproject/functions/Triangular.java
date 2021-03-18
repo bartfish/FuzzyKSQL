@@ -4,7 +4,7 @@ public class Triangular {
 
     // "TF;LEFT;RIGHT;MIDDLE,VALUE"
     // "TF:0.5;12;4,xValue"
-    public double TriangularFunction(Double left, Double middle, Double right, Double xValue) {
+    public static double TriangularFunction(Double left, Double middle, Double right, Double xValue) {
 
         if (xValue <= left) {
             return 0;
