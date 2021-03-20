@@ -31,3 +31,25 @@ select * from AGV_1_STREAM_wu a
 inner join AGV_2_STREAM_wu b within 7 days on a.machineState = b.machineState 
 WHERE fuzzyfiltering(a.weightUnit, b.weightUnit) < 2 emit changes;
 
+
+-- FUZZY FILTERING
+
+-- AROUND_TRIANGULAR
+    
+    -- CRISP APPROACH: 
+select * from AGV_1_STREAM_WU w WHERE w.TRACTION > 0.8 EMIT CHANGES;
+    -- FUZZY APPROACH:
+select * from AGV_1_STREAM_WU w WHERE (AROUND_TRIANGULAR('LET', w.TRACTION, 50, 80, 70) > 0.6) EMIT CHANGES;
+select * from AGV_1_STREAM_WU w WHERE (AROUND_TRIANGULAR('CONST', w.TRACTION, 50, 80, 70) > 0.6) EMIT CHANGES; -- TO BE IMPLEMENTED AND TESTED
+
+-- AROUND_TRAPEZ
+
+
+-- AROUND_TRAPEZ_L
+
+
+-- AROUND_TRAPEZ_R
+
+
+-- AROUND_GAUSS
+
