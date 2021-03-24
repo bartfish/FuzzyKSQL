@@ -19,7 +19,7 @@ public class AroundGauss {
         if (functionDefined == "LET") {
             return Gauss.GaussianFunction(middle, kParameter, searchedValue);
         }
-        return Gauss.GaussianFunction(middle, kParameter, searchedValue);// DEFINED CONFIGURED GAUSS LATER
+        return Gauss.GaussianFunctionPredefined(searchedValue);// DEFINED CONFIGURED GAUSS LATER
 
     }
 
