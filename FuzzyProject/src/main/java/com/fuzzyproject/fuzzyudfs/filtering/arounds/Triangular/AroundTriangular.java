@@ -1,4 +1,4 @@
-package com.fuzzyproject.fuzzyudfs.filtering.Triangular;
+package com.fuzzyproject.fuzzyudfs.filtering.arounds.Triangular;
 
 import com.fuzzyproject.functions.Triangular;
 import io.confluent.ksql.function.udf.Udf;

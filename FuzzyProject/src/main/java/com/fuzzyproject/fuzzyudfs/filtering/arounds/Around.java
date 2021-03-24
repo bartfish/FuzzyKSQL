@@ -1,4 +1,4 @@
-package com.fuzzyproject.fuzzyudfs.filtering;
+package com.fuzzyproject.fuzzyudfs.filtering.arounds;
 
 import com.fuzzyproject.functions.FunctionSwitcher;
 import io.confluent.ksql.function.udf.Udf;

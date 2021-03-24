@@ -1,4 +1,4 @@
-package com.fuzzyproject.fuzzyudfs.filtering.Gauss;
+package com.fuzzyproject.fuzzyudfs.filtering.arounds.Gauss;
 
 import com.fuzzyproject.functions.Gauss;
 import io.confluent.ksql.function.udf.Udf;
