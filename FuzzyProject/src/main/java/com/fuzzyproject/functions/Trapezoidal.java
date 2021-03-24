@@ -13,6 +13,12 @@ public class Trapezoidal {
 
     public static double TrapezoidalFunction(Double left, Double leftTop, Double rightTop, Double right, Double xValue) {
 
+        System.out.println("left " + left);
+        System.out.println("leftTop " + leftTop);
+        System.out.println("rightTop " + rightTop);
+        System.out.println("right " + right);
+        System.out.println("xValue " + xValue);
+
         if (xValue < left || xValue > right) {
             return 0;
         }
@@ -29,7 +35,7 @@ public class Trapezoidal {
         }
 
         if (xValue >= rightTop && xValue <= right) {
-            double nominator = left - xValue;
+            double nominator = right - xValue;
             double denominator = right - rightTop;
 
             return nominator/denominator;

@@ -1,6 +1,7 @@
 package com.fuzzyproject;
 
 import com.fuzzyproject.functions.FunctionSwitcher;
+import com.fuzzyproject.functions.mixed.LinguisticDef;
 
 public class Main {
 
@@ -23,6 +24,7 @@ public class Main {
 //        FunctionSwitcher.FunctionSwitch(MULTI_AREAS_WITH_LINGUISTICS);
 
 //        System.out.println(FunctionSwitcher.FunctionSwitchV("TRIA;50;80;150", 79.5));
+        System.out.println(LinguisticDef.defineLinguisticRanges("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 99.0));
 
 
 

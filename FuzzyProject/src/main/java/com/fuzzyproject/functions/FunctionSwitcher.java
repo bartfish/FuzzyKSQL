@@ -1,5 +1,7 @@
 package com.fuzzyproject.functions;
 
+import com.fuzzyproject.functions.mixed.LinguisticDef;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,31 +52,31 @@ public class FunctionSwitcher {
         switch(elements[0]) {
             case "TRIA":
             {
-                System.out.println(arrOfVAlues.get(0) + " " + arrOfVAlues.get(1) + " " + arrOfVAlues.get(2) + " " + arrOfVAlues.get(3));
+//                System.out.println(arrOfVAlues.get(0) + " " + arrOfVAlues.get(1) + " " + arrOfVAlues.get(2) + " " + arrOfVAlues.get(3));
                 return Triangular.TriangularFunction(arrOfVAlues.get(0), arrOfVAlues.get(1), arrOfVAlues.get(2), arrOfVAlues.get(3));
             }
 
             case "GAUS":
             {
-                System.out.println(arrOfVAlues.get(0) + " " + arrOfVAlues.get(1) + " " + arrOfVAlues.get(2));
+//                System.out.println(arrOfVAlues.get(0) + " " + arrOfVAlues.get(1) + " " + arrOfVAlues.get(2));
                 return Gauss.GaussianFunction(arrOfVAlues.get(0), arrOfVAlues.get(1), arrOfVAlues.get(2));
             }
 
             case "TR_F":
             {
-                System.out.println(arrOfVAlues.get(0) + " " + arrOfVAlues.get(1) + " " + arrOfVAlues.get(2) + " " + arrOfVAlues.get(3) + " " + arrOfVAlues.get(4));
+//                System.out.println(arrOfVAlues.get(0) + " " + arrOfVAlues.get(1) + " " + arrOfVAlues.get(2) + " " + arrOfVAlues.get(3) + " " + arrOfVAlues.get(4));
                 return Trapezoidal.TrapezoidalFunction(arrOfVAlues.get(0), arrOfVAlues.get(1), arrOfVAlues.get(2), arrOfVAlues.get(3), arrOfVAlues.get(4));
             }
 
             case "TR_L":
             {
-                System.out.println(arrOfVAlues.get(0) + " " + arrOfVAlues.get(1) + " " + arrOfVAlues.get(2));
+//                System.out.println(arrOfVAlues.get(0) + " " + arrOfVAlues.get(1) + " " + arrOfVAlues.get(2));
                 return Trapezoidal.TrapezoidalLeft(arrOfVAlues.get(0),arrOfVAlues.get(1),arrOfVAlues.get(2));
             }
 
             case "TR_R":
             {
-                System.out.println(arrOfVAlues.get(0) + " " + arrOfVAlues.get(1) + " " + arrOfVAlues.get(2));
+//                System.out.println(arrOfVAlues.get(0) + " " + arrOfVAlues.get(1) + " " + arrOfVAlues.get(2));
                 return Trapezoidal.TrapezoidalRight(arrOfVAlues.get(0),arrOfVAlues.get(1),arrOfVAlues.get(2));
             }
 

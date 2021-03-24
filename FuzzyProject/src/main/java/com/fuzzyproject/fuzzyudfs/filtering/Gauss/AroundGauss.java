@@ -1,7 +1,6 @@
-package com.fuzzyproject.filtering.Gauss;
+package com.fuzzyproject.fuzzyudfs.filtering.Gauss;
 
 import com.fuzzyproject.functions.Gauss;
-import com.fuzzyproject.functions.Triangular;
 import io.confluent.ksql.function.udf.Udf;
 import io.confluent.ksql.function.udf.UdfParameter;
 import io.confluent.ksql.function.udf.UdfDescription;

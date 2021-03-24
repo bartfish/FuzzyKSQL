@@ -1,7 +1,6 @@
-package com.fuzzyproject.filtering.Trapezoidal;
+package com.fuzzyproject.fuzzyudfs.filtering.Trapezoidal;
 
 import com.fuzzyproject.functions.Trapezoidal;
-import com.fuzzyproject.functions.Triangular;
 import io.confluent.ksql.function.udf.Udf;
 import io.confluent.ksql.function.udf.UdfParameter;
 import io.confluent.ksql.function.udf.UdfDescription;
