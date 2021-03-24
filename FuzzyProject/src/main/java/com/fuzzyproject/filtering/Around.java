@@ -10,9 +10,10 @@ public class Around {
 
     @Udf(description = "Check whether value fits triangular function defined in arguments")
     public Double AroundTriangular(
-            @UdfParameter(value = "expression", description = "exemplary expression: TRIA;0.5;12;16;12") final String expression
+            @UdfParameter(value = "expression", description = "exemplary expression: TRIA;LEFT;MIDDLE;RIGHT") final String expression,
+            @UdfParameter(value = "seachedValue", description = "searchedValue") final Double searchedValue
     ) {
-        return FunctionSwitcher.FunctionSwitch(expression);
+        return FunctionSwitcher.FunctionSwitchV(expression, searchedValue);
     }
 
 }

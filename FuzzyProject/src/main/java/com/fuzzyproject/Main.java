@@ -22,6 +22,8 @@ public class Main {
 //        System.out.println(FunctionSwitcher.FunctionSwitch(TRAPEZOIDAL_RIGHT));  // works
 //        FunctionSwitcher.FunctionSwitch(MULTI_AREAS_WITH_LINGUISTICS);
 
+//        System.out.println(FunctionSwitcher.FunctionSwitchV("TRIA;50;80;150", 79.5));
+
 
 
     }

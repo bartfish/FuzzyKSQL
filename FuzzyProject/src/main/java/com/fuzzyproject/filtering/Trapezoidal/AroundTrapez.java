@@ -1,4 +1,4 @@
-package com.fuzzyproject.filtering.Triangular;
+package com.fuzzyproject.filtering.Trapezoidal;
 
 import com.fuzzyproject.functions.Trapezoidal;
 import com.fuzzyproject.functions.Triangular;
