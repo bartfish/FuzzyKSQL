@@ -31,3 +31,24 @@ select * from AGV_1_STREAM_wu a
 inner join AGV_2_STREAM_wu b within 7 days on a.machineState = b.machineState 
 WHERE fuzzyfiltering(a.weightUnit, b.weightUnit) < 2 emit changes;
 
+
+-- FUZZY FILTERING - each elastic approach has its constant equivalent, where parameters are defined before the compilation of the solution
+    
+-- CRISP APPROACH: 
+
+select * from AGV_1_STREAM_WU w WHERE w.TRACTION > 0.8 EMIT CHANGES;
+-- FUZZY APPROACH:
+select * from AGV_1_STREAM_WU w WHERE (AROUND_TRIANGULAR('LET', w.TRACTION, 50, 80, 70) > 0.6) EMIT CHANGES;
+select * from AGV_1_STREAM_WU w WHERE (AROUND_TRIANGULAR('CONST', w.TRACTION) > 0.6) EMIT CHANGES; -- TO BE IMPLEMENTED AND TESTED
+
+-- AROUND_TRAPEZ
+select * from AGV_1_STREAM_WU w WHERE (AROUND_TRAPEZ('LET', w.TRACTION, 20, 40, 50, 60) > 0.4) EMIT CHANGES;
+
+-- AROUND_TRAPEZ_L
+select * from AGV_1_STREAM_WU w WHERE (AROUND_TRAPEZ_L('LET', w.TRACTION, 20, 40) > 0.6) EMIT CHANGES;
+
+-- AROUND_TRAPEZ_R
+select * from AGV_1_STREAM_WU w WHERE (AROUND_TRAPEZ_R('LET', w.TRACTION, 40, 80) > 0.9) EMIT CHANGES;
+
+-- AROUND_GAUSS
+select * from AGV_1_STREAM_WU w WHERE (AROUND_GAUSS('LET', w.TRACTION, 40, 10) > 0.9) EMIT CHANGES;

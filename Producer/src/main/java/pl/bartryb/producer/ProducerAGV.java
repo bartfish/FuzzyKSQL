@@ -27,9 +27,9 @@ public class ProducerAGV {
                 // task to run goes here
                 //   System.out.println("Hello !!!");
                 AutonomousGuidedVehicle agv = new AutonomousGuidedVehicle();
-                agv.traction = rand.nextDouble();; // 0 - 100
-                agv.latitude = rand.nextDouble(); // 50.0000001
-                agv.longtitute = rand.nextDouble(); // 50.0000001
+                agv.traction = rand.nextDouble() * 100; // 0 - 100
+                agv.latitude = rand.nextDouble() * 60; // 50.0000001
+                agv.longtitute = rand.nextDouble() * 60; // 50.0000001
                 agv.machineState = machineStates.get(rand.nextInt(3)); // STANDBY, WORKING, BROKEN, LOST_CONNECTION, LOST
                 agv.humidity = rand.nextDouble(); // 0 - 10 (0 means dry, 10 means a lot of water)
                 agv.batteryPercentageLeft = rand.nextDouble(); // 0 - 100 (battery lasting percentage)
@@ -64,9 +64,9 @@ public class ProducerAGV {
                 // task to run goes here
                 //   System.out.println("Hello !!!");
                 AutonomousGuidedVehicleOther agv = new AutonomousGuidedVehicleOther();
-                agv.traction = rand.nextDouble();; // 0 - 100
-                agv.latitude = rand.nextDouble(); // 50.0000001
-                agv.longtitute = rand.nextDouble(); // 50.0000001
+                agv.traction = rand.nextDouble() * 100; // 0 - 100
+                agv.latitude = rand.nextDouble() * 60; // 50.0000001
+                agv.longtitute = rand.nextDouble() *60; // 50.0000001
                 agv.machineState = machineStates.get(rand.nextInt(3)); // STANDBY, WORKING, BROKEN, LOST_CONNECTION, LOST
                 agv.humidity = rand.nextDouble(); // 0 - 10 (0 means dry, 10 means a lot of water)
                 agv.batteryPercentageLeft = rand.nextDouble(); // 0 - 100 (battery lasting percentage)
