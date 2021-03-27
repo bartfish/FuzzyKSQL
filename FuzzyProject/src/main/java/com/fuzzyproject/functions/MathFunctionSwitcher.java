@@ -5,7 +5,7 @@ import com.fuzzyproject.functions.mixed.LinguisticDef;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FunctionSwitcher {
+public class MathFunctionSwitcher {
 
     // BASED_PAYLOADS:
 

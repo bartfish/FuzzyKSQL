@@ -1,6 +1,6 @@
 package com.fuzzyproject.fuzzyudfs.filtering.arounds;
 
-import com.fuzzyproject.functions.FunctionSwitcher;
+import com.fuzzyproject.functions.MathFunctionSwitcher;
 import io.confluent.ksql.function.udf.Udf;
 import io.confluent.ksql.function.udf.UdfParameter;
 import io.confluent.ksql.function.udf.UdfDescription;
@@ -13,7 +13,7 @@ public class Around {
             @UdfParameter(value = "expression", description = "exemplary expression: TRIA;LEFT;MIDDLE;RIGHT") final String expression,
             @UdfParameter(value = "seachedValue", description = "searchedValue") final Double searchedValue
     ) {
-        return FunctionSwitcher.FunctionSwitchV(expression, searchedValue);
+        return MathFunctionSwitcher.FunctionSwitchV(expression, searchedValue);
     }
 
 }

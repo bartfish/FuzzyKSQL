@@ -1,6 +1,6 @@
 package com.fuzzyproject.functions.mixed;
 
-import com.fuzzyproject.functions.FunctionSwitcher;
+import com.fuzzyproject.functions.MathFunctionSwitcher;
 
 import java.util.*;
 
@@ -26,7 +26,7 @@ public class LinguisticDef {
         HashMap<String, Double> results = new HashMap<>();
         for (String i : matchedLinguistic.keySet()) {
             System.out.println("key: " + i + " value: " + matchedLinguistic.get(i));
-            results.put(i, FunctionSwitcher.FunctionSwitchV(matchedLinguistic.get(i), searchedValue));
+            results.put(i, MathFunctionSwitcher.FunctionSwitchV(matchedLinguistic.get(i), searchedValue));
         }
 
         System.out.println(results);

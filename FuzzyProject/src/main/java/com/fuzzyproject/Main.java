@@ -1,7 +1,8 @@
 package com.fuzzyproject;
 
-import com.fuzzyproject.functions.FunctionSwitcher;
+import com.fuzzyproject.functions.MathFunctionSwitcher;
 import com.fuzzyproject.functions.mixed.LinguisticDef;
+import com.fuzzyproject.fuzzyudfs.filtering.operators.FAnd;
 
 public class Main {
 
@@ -16,9 +17,9 @@ public class Main {
 
 //        String MULTI_AREAS_WITH_LINGUISTICS = "MIXE;{LOW;TR_F;0;10;30;40;}/{NORMAL;TR_F;45;55;60;70;}/{HIGH;TR_F;65;75;90;95};(50);";
 
-        System.out.println(FunctionSwitcher.FunctionSwitch(TRIANGULAR_SIMPLE)); // works
-//        System.out.println(FunctionSwitcher.FunctionSwitch(GAUSS_SIMPLE)); // works
-//        System.out.println(FunctionSwitcher.FunctionSwitch(TRAPEZOIDAL_SIMPLE)); // works
+        System.out.println(MathFunctionSwitcher.FunctionSwitch(TRIANGULAR_SIMPLE)); // works
+//        System.out.println(MathFunctionSwitcher.FunctionSwitch(GAUSS_SIMPLE)); // works
+//        System.out.println(MathFunctionSwitcher.FunctionSwitch(TRAPEZOIDAL_SIMPLE)); // works
 //        System.out.println(FunctionSwitcher.FunctionSwitch(TRAPEZOIDAL_LEFT)); // works
 //        System.out.println(FunctionSwitcher.FunctionSwitch(TRAPEZOIDAL_RIGHT));  // works
 //        FunctionSwitcher.FunctionSwitch(MULTI_AREAS_WITH_LINGUISTICS);
@@ -26,6 +27,7 @@ public class Main {
 //        System.out.println(FunctionSwitcher.FunctionSwitchV("TRIA;50;80;150", 79.5));
         System.out.println(LinguisticDef.defineLinguisticRanges("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 99.0));
 
+        FAnd.FAnd("Is;","AROUND_TRIANGULAR;", "AROUND_TRIANGULAR;", null, null, null);
 
 
     }
