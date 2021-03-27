@@ -7,10 +7,9 @@ import java.util.*;
 public class LinguisticDef {
 
 
-    public static String defineLinguisticRanges(String payload, Double searchedValue) {
+    public static String defineLinguisticRanges(String payload, Double searchedValue, Double verificationCoeff) {
 
-        // "lowTR_F;20;30;40;50/normal;TR_F;40;50;60;70;high;TR_F;50;80;90;100"
-
+        // "low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100"
         // split by / and assign linguistic values to functions
             // key=linguistic_value, value=function_with_range
         String[] linguisticElements = payload.split(("/"));
@@ -28,11 +27,15 @@ public class LinguisticDef {
             System.out.println("key: " + i + " value: " + matchedLinguistic.get(i));
             results.put(i, MathFunctionSwitcher.FunctionSwitchV(matchedLinguistic.get(i), searchedValue));
         }
-
-        System.out.println(results);
+//        System.out.println(results);
 
         // get the linguistic one which has the biggest value which is bigger than 0
-        System.out.println(Collections.max(results.values()));
+//        System.out.println(Collections.max(results.values()));
+
+        // if the biggest value is less than the verification coefficient, then no linguistic value can be assigned
+        if (Collections.max(results.values()) < verificationCoeff) {
+            return "none";
+        }
 
         // return the hashmap
         Map.Entry<String, Double> maxEntry = null;
@@ -44,12 +47,10 @@ public class LinguisticDef {
                 maxEntry = entry;
             }
         }
-        System.out.println(maxEntry.getKey());
-
+//        System.out.println(maxEntry.getKey());
         // check the agreement coefficient for each function and verify which value is the closest
 
         // return the linguistic value of the given parameter
-
         return maxEntry.getKey();
     }
 }
