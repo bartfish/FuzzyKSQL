@@ -44,12 +44,12 @@ public class LinguisticDef {
                 maxEntry = entry;
             }
         }
-        System.out.println(maxEntry);
+        System.out.println(maxEntry.getKey());
 
         // check the agreement coefficient for each function and verify which value is the closest
 
         // return the linguistic value of the given parameter
 
-        return "normal";
+        return maxEntry.getKey();
     }
 }
