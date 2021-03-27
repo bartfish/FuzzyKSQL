@@ -54,6 +54,12 @@
             <artifactId>h2o-genmodel</artifactId>
             <version>3.14.0.7</version>
         </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
 
     </dependencies>
     <build>

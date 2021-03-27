@@ -1,4 +1,4 @@
-package com.fuzzyproject.filtering.Trapezoidal;
+package com.fuzzyproject.fuzzyudfs.filtering.arounds.Trapezoidal;
 
 import com.fuzzyproject.functions.Trapezoidal;
 import io.confluent.ksql.function.udf.Udf;
