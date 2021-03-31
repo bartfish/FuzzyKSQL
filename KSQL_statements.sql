@@ -62,3 +62,21 @@ select * from AGV_1_STREAM_WU w WHERE (AROUND('TR_R;40;60;', w.TRACTION) > 0.9) 
 
 select * from AGV_1_STREAM_WU w WHERE (AROUND('GAUS;40;60;80', w.TRACTION) > 0.9) EMIT CHANGES;
 
+
+-- CRISP JOIN
+select * from AGV_1_STREAM_wu a inner join AGV_2_STREAM_wu b within 7 days on a.machineState = b.machineState emit changes;
+select * from AGV_1_STREAM_wu a inner join AGV_2_STREAM_wu b within 7 days on a.TRACTION = b.TRACTION emit changes;
+
+-- FUZZY JOIN based on linguistic assignments
+select 
+    a.TRACTION,
+    b.TRACTION,
+    ASSIGN_TO_LING('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 0.8) as linguisticA,
+    ASSIGN_TO_LING('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', b.TRACTION, 0.8) as linguisticB
+from AGV_1_STREAM_wu a 
+inner join AGV_2_STREAM_wu b 
+within 7 days 
+on 
+ASSIGN_TO_LING('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 0.8) = ASSIGN_TO_LING('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', b.TRACTION, 0.8) 
+where ASSIGN_TO_LING('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', b.TRACTION, 0.8) != 'none' 
+emit changes;
