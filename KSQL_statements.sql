@@ -82,36 +82,28 @@ emit changes;
 
 
 -- FUZZY IS
-select * from AGV_1_STREAM_wu a where VERIFYIS('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 'normal', 0.8) emit changes;
+select * from AGV_1_STREAM_wu a where VERIFY_IS('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 'normal', 0.8) emit changes;
 
 select * from AGV_1_STREAM_wu a, AGV_2_STREAM_wu b WHERE a.TRACTION < 80 AND b.TRACTION < 75 EMIT CHANGES;
-
 
 -- FUZZY_AND
 
 select * from AGV_1_STREAM_wu a
 where FUZZY_AND(
-    VERIFYIS('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 'normal', 0.4),
-    VERIFYIS('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.LATITUDE, 'normal', 0.4)
-) emit changes;
-
-select * from AGV_1_STREAM_wu a
-where FUZZY_AND(
-    VERIFYIS('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 'normal', 0.4),
-    VERIFYIS('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.LATITUDE, 'normal', 0.4),
-    AROUND('TR_F;0.1;0.35;0.8;0.99', a.BATTERYPERCENTAGELEFT) > 0.5
->) emit changes;
+    GET_MEMBERSHIP_DEGREE('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 'high'),
+    GET_MEMBERSHIP_DEGREE('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.LATITUDE, 'low')
+) > 0.5 emit changes;
 
 -- FUZZY_OR 
 
 select * from AGV_1_STREAM_wu a
 where FUZZY_OR(
-    VERIFYIS('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 'normal', 0.7),
-    VERIFYIS('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.LATITUDE, 'normal', 0.7),
-    AROUND('TR_F;0.1;0.35;0.8;0.99', a.BATTERYPERCENTAGELEFT) > 0.8
-) emit changes;
+    GET_MEMBERSHIP_DEGREE('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 'high'),
+    GET_MEMBERSHIP_DEGREE('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.LATITUDE, 'low'),
+    AROUND('TR_F;0.1;0.35;0.8;0.99', a.BATTERYPERCENTAGELEFT)
+) > 0.7 emit changes;
 
--- FUZZY GROUP BY
+-- FUZZY GROUP BY - todo
 select 
     a.TRACTION,
     b.TRACTION,
@@ -129,3 +121,37 @@ A_TRACTION, B_TRACTION, ASSIGN_TO_LING('low:TR_F;20;30;40;50/normal:TR_F;40;50;6
 
 ASSIGN_TO_LING('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 0.8)
 emit changes;
+
+-- FJOIN - TODO
+
+
+
+-- EXTENDED_AND
+
+select * from AGV_1_STREAM_wu a
+where EXTENDED_AND(
+    VERIFY_IS('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 'normal', 0.4),
+    VERIFY_IS('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.LATITUDE, 'normal', 0.4)
+) emit changes;
+
+select * from AGV_1_STREAM_wu a
+where EXTENDED_AND(
+    VERIFY_IS('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 'normal', 0.4),
+    VERIFY_IS('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.LATITUDE, 'normal', 0.4),
+    AROUND('TR_F;0.1;0.35;0.8;0.99', a.BATTERYPERCENTAGELEFT) > 0.5
+>) emit changes;
+
+-- EXTENDED_OR
+
+select * from AGV_1_STREAM_wu a
+where EXTENDED_OR(
+    VERIFY_IS('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 'normal', 0.4),
+    VERIFY_IS('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.LATITUDE, 'normal', 0.4)
+) emit changes;
+
+select * from AGV_1_STREAM_wu a
+where EXTENDED_OR(
+    VERIFY_IS('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 'normal', 0.4),
+    VERIFY_IS('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.LATITUDE, 'normal', 0.4),
+    AROUND('TR_F;0.1;0.35;0.8;0.99', a.BATTERYPERCENTAGELEFT) > 0.5
+>) emit changes;
