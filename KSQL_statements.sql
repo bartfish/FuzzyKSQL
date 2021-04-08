@@ -85,12 +85,14 @@ emit changes;
 -- FUZZY IS
 select * from AGV_1_STREAM_wu a where VERIFYIS('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 'normal', 0.8) emit changes;
 
-
 select * from AGV_1_STREAM_wu a, AGV_2_STREAM_wu b WHERE a.TRACTION < 80 AND b.TRACTION < 75 EMIT CHANGES;
 
-select * from AGV_1_STREAM_wu a, AGV_2_STREAM_wu b 
-where FUZZY_AND(
+
+-- FUZZY_AND
+
+select * from AGV_1_STREAM_wu a
+where FUZZY_AND({
     VERIFYIS('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 'normal', 0.8),
-    VERIFYIS('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 'normal', 0.8),
+    VERIFYIS('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.LATITUDE, 'LOW', 0.75)}
 ) emit changes;
 
