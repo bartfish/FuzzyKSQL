@@ -12,7 +12,7 @@ import java.util.List;
 @UdfDescription(name = "FUZZY_AND", description = "check if value fits specific linguistic one")
 public class FAnd {
 
-    @Udf(description = "Overriden AND operator, max of ANDs is 6 and at least 2 arguments are required")
+    @Udf(description = "Overriden AND operator - list of at least 2 booleans as parameters")
     public static Boolean FAnd(@UdfParameter(value = "boolean elements", description = "array of elements") final Boolean... elements) {
 
         for (Boolean element : elements) {
@@ -21,11 +21,6 @@ public class FAnd {
             }
         }
 
-//        System.out.println(FunctionIdentifier.IdentifyFunction(condition1));
-//        System.out.println(FunctionIdentifier.IdentifyFunction(condition2));
-
-//        String value = LinguisticDef.defineLinguisticRanges(expression, searchedValue);
-//        return value == linguisticValue;
         return true;
     }
 
