@@ -110,3 +110,22 @@ where FUZZY_OR(
     VERIFYIS('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.LATITUDE, 'normal', 0.7),
     AROUND('TR_F;0.1;0.35;0.8;0.99', a.BATTERYPERCENTAGELEFT) > 0.8
 ) emit changes;
+
+-- FUZZY GROUP BY
+select 
+    a.TRACTION,
+    b.TRACTION,
+    SUM(a.TRACTION),
+    ASSIGN_TO_LING('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 0.8) as linguisticA,
+    ASSIGN_TO_LING('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', b.TRACTION, 0.6) as linguisticB
+from AGV_1_STREAM_wu a 
+inner join AGV_2_STREAM_wu b 
+within 7 days 
+on a.machineState = b.machineState 
+where ASSIGN_TO_LING('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', b.TRACTION, 0.8) != 'none' 
+GROUP BY 
+
+A_TRACTION, B_TRACTION, ASSIGN_TO_LING('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', B_TRACTION, 0.6),
+
+ASSIGN_TO_LING('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 0.8)
+emit changes;
