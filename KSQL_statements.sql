@@ -1,5 +1,3 @@
-
-
 -- stream 1
 CREATE STREAM AGV_1_STREAM_wu (traction DOUBLE, longtitude DOUBLE, latitude DOUBLE, 
 batteryPercentageLeft DOUBLE, machineState VARCHAR, 
@@ -37,6 +35,7 @@ WHERE fuzzyfiltering(a.weightUnit, b.weightUnit) < 2 emit changes;
 -- CRISP APPROACH: 
 
 select * from AGV_1_STREAM_WU w WHERE w.TRACTION > 0.8 EMIT CHANGES;
+
 -- FUZZY APPROACH:
 select * from AGV_1_STREAM_WU w WHERE (AROUND_TRIANGULAR('LET', w.TRACTION, 50, 80, 70) > 0.6) EMIT CHANGES;
 select * from AGV_1_STREAM_WU w WHERE (AROUND_TRIANGULAR('CONST', w.TRACTION) > 0.6) EMIT CHANGES; -- TO BE IMPLEMENTED AND TESTED
@@ -105,3 +104,9 @@ where FUZZY_AND(
 
 -- FUZZY_OR 
 
+select * from AGV_1_STREAM_wu a
+where FUZZY_OR(
+    VERIFYIS('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 'normal', 0.7),
+    VERIFYIS('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.LATITUDE, 'normal', 0.7),
+    AROUND('TR_F;0.1;0.35;0.8;0.99', a.BATTERYPERCENTAGELEFT) > 0.8
+) emit changes;
