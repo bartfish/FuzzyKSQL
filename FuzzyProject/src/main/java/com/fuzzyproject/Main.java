@@ -30,8 +30,8 @@ public class Main {
         // System.out.println(LinguisticDef.defineLinguisticRanges("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 99.0, 0.6));
 //        System.out.println(IsLing.Is("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "high", 0.7));
 //        System.out.println(AssignToLing.AssignToLing("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 60.0, 0.7));
-        System.out.println(FAnd.FAnd(IsLing.VerifyIs("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "high", 0.7),
-                IsLing.VerifyIs("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "low", 0.7)));
+//        System.out.println(FAnd.FAnd(IsLing.VerifyIs("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "high", 0.7),
+//                IsLing.VerifyIs("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "low", 0.7)));
 
 
     }
