@@ -13,11 +13,10 @@ import java.util.List;
 public class FAnd {
 
     @Udf(description = "Overriden AND operator, max of ANDs is 6 and at least 2 arguments are required")
-    public static Boolean FAnd(@UdfParameter List<Boolean> elements) {
+    public static Boolean FAnd(@UdfParameter Boolean ...elements) {
 
-
-        for(int i = 0; i < elements.size(); i++) {
-            if (!elements.get(i)) {
+        for (Boolean element : elements) {
+            if (!element) {
                 return false;
             }
         }
