@@ -34,7 +34,7 @@ public class Main {
 
 //        System.out.println(IsLing.VerifyIs("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "high", 0.7));
 
-//        System.out.println(AssignToLing.AssignToLing("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 60.0, 0.7));
+//        System.out.println(AssignToLing.AssignToLing("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 91.0, 0.7));
 
 //        System.out.println(FAnd.FAnd(IsLing.VerifyIs("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "high", 0.7),
 //                IsLing.VerifyIs("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "low", 0.7)));
@@ -43,14 +43,16 @@ public class Main {
 //                IsLing.VerifyIs("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "low", 0.7),
 //                IsLing.VerifyIs("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "high", 0.7)));
 
-//        System.out.println("Membership degree " + MembershipDegree.MembershipDegreeGetter("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0));
+        System.out.println("Membership degree " + MembershipDegree.MembershipDegreeGetter("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "high"));
 //        System.out.println("Membership degree " + MembershipDegree.MembershipDegreeGetter("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 45.0));
 //
-        System.out.println(FAnd_Norm.FAnd(MembershipDegree.MembershipDegreeGetter("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0),
-                MembershipDegree.MembershipDegreeGetter("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 69.50)));
-//
-//        System.out.println(FOr_Norm.FOr(MembershipDegree.MembershipDegreeGetter("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0),
-//                MembershipDegree.MembershipDegreeGetter("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 69.50)));
+//        System.out.println(
+//                FAnd_Norm.FAnd(
+//                        MembershipDegree.MembershipDegreeGetter("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "high"),
+//                        MembershipDegree.MembershipDegreeGetter("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 69.50, "low")));
+////
+        System.out.println(FOr_Norm.FOr(MembershipDegree.MembershipDegreeGetter("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "high"),
+                MembershipDegree.MembershipDegreeGetter("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 69.50, "high")));
 
 
     }

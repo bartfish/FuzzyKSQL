@@ -1,5 +1,6 @@
 package com.fuzzyproject.fuzzyudfs.assign;
 
+import com.fuzzyproject.functions.mixed.AssignLinguistic;
 import com.fuzzyproject.functions.mixed.LinguisticDef;
 import io.confluent.ksql.function.udf.Udf;
 import io.confluent.ksql.function.udf.UdfParameter;
@@ -16,7 +17,7 @@ public class AssignToLing {
             @UdfParameter(value = "seachedValue", description = "searchedValue") final Double searchedValue,
             @UdfParameter(value = "verificationCoefficient", description = "verificationCoefficient 0-1") final Double verificationCoefficient
     ) {
-        Map.Entry<String, Double> returnedEntry = LinguisticDef.defineLinguisticRanges(expression, searchedValue);
+        Map.Entry<String, Double> returnedEntry = AssignLinguistic.assignLinguisticElement(expression, searchedValue);
         if (returnedEntry.getValue() < verificationCoefficient) {
             return "none";
         }

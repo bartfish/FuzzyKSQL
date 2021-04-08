@@ -38,7 +38,7 @@ public class MathFunctionSwitcher {
         String data = definedPayload;
         String[] elements = data.split((";"));
 
-        System.out.println(elements.length);
+//        System.out.println(elements.length);
         
         List<Double> arrOfVAlues = new ArrayList<>();
 
@@ -102,7 +102,7 @@ public class MathFunctionSwitcher {
         String data = definedPayload;
         String[] elements = data.split((";"));
 
-        System.out.println(elements.length);
+//        System.out.println(elements.length);
 
         List<Double> arrOfVAlues = new ArrayList<>();
 
