@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-@UdfDescription(name = "FUZZY_AND", description = "check if value fits specific linguistic one")
+@UdfDescription(name = "EXTENDED_AND", description = "check if value fits specific linguistic one")
 public class FAnd {
 
     @Udf(description = "Overriden AND operator - list of at least 2 booleans as parameters")

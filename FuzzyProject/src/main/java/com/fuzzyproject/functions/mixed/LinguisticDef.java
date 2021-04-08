@@ -7,7 +7,7 @@ import java.util.*;
 public class LinguisticDef {
 
 
-    public static String defineLinguisticRanges(String payload, Double searchedValue, Double verificationCoeff) {
+    public static Map.Entry<String, Double> defineLinguisticRanges(String payload, Double searchedValue) {
 
         // "low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100"
         // split by / and assign linguistic values to functions
@@ -33,9 +33,9 @@ public class LinguisticDef {
 //        System.out.println(Collections.max(results.values()));
 
         // if the biggest value is less than the verification coefficient, then no linguistic value can be assigned
-        if (Collections.max(results.values()) < verificationCoeff) {
-            return "none";
-        }
+//        if (Collections.max(results.values()) < verificationCoeff) {
+//            return null;
+//        }
 
         // return the hashmap
         Map.Entry<String, Double> maxEntry = null;
@@ -51,6 +51,6 @@ public class LinguisticDef {
         // check the agreement coefficient for each function and verify which value is the closest
 
         // return the linguistic value of the given parameter
-        return maxEntry.getKey();
+        return maxEntry;
     }
 }

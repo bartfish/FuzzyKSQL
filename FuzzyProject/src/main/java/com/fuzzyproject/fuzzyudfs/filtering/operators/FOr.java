@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-@UdfDescription(name = "FUZZY_OR", description = "check if value fits specific linguistic one")
+@UdfDescription(name = "EXTENDED_OR", description = "check if value fits specific linguistic one")
 public class FOr {
 
     @Udf(description = "Overriden OR operator - list of at least 2 booleans as parameters")

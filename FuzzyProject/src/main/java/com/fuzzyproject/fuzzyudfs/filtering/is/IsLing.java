@@ -5,6 +5,8 @@ import io.confluent.ksql.function.udf.Udf;
 import io.confluent.ksql.function.udf.UdfParameter;
 import io.confluent.ksql.function.udf.UdfDescription;
 
+import java.util.Map;
+
 @UdfDescription(name = "VERIFYIS", description = "check if value fits specific linguistic one")
 public class IsLing {
 
@@ -15,8 +17,11 @@ public class IsLing {
             @UdfParameter(value = "linguisticValue", description = "linguisticValue") final String linguisticValue,
             @UdfParameter(value = "verificationCoefficient", description = "verificationCoefficient 0-1") final Double verificationCoefficient
     ) {
-        String value = LinguisticDef.defineLinguisticRanges(expression, searchedValue, verificationCoefficient);
-        return value.equals(linguisticValue);
+        Map.Entry<String, Double> returnedEntry = LinguisticDef.defineLinguisticRanges(expression, searchedValue);
+        if (returnedEntry.getValue() < verificationCoefficient) { // if the membership degree is too small then there is no point in verifying if the linguistic condition fits
+            return false;
+        }
+        return returnedEntry.getKey().equals(linguisticValue);
     }
 
 }
