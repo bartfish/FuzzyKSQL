@@ -70,14 +70,14 @@ select * from AGV_1_STREAM_wu a inner join AGV_2_STREAM_wu b within 7 days on a.
 select 
     a.TRACTION,
     b.TRACTION,
-    ASSIGN_TO_LING('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 0.8) as linguisticA,
-    ASSIGN_TO_LING('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', b.TRACTION, 0.8) as linguisticB
+    ASSIGN_LING_MD('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 0.8) as linguisticA,
+    ASSIGN_LING_MD('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', b.TRACTION, 0.8) as linguisticB
 from AGV_1_STREAM_wu a 
 inner join AGV_2_STREAM_wu b 
 within 7 days 
 on 
-ASSIGN_TO_LING('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 0.8) = ASSIGN_TO_LING('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', b.TRACTION, 0.8) 
-where ASSIGN_TO_LING('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', b.TRACTION, 0.8) != 'none' 
+ASSIGN_LING_MD('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 0.8) = ASSIGN_LING_MD('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', b.TRACTION, 0.8) 
+where ASSIGN_LING_MD('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', b.TRACTION, 0.8) != 'none' 
 emit changes;
 
 
@@ -104,27 +104,32 @@ where FUZZY_OR(
 ) > 0.7 emit changes;
 
 -- FUZZY GROUP BY - todo
-select 
-    a.TRACTION,
-    b.TRACTION,
-    SUM(a.TRACTION),
-    ASSIGN_TO_LING('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 0.8) as linguisticA,
-    ASSIGN_TO_LING('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', b.TRACTION, 0.6) as linguisticB
-from AGV_1_STREAM_wu a 
-inner join AGV_2_STREAM_wu b 
-within 7 days 
-on a.machineState = b.machineState 
-where ASSIGN_TO_LING('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', b.TRACTION, 0.8) != 'none' 
-GROUP BY 
+SELECT w.TRACTION, COUNT(*) FROM AGV_1_STREAM_WU w WINDOW TUMBLING (SIZE 1 HOUR) GROUP BY ASSIGN_LING('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', w.TRACTION), w.TRACTION EMIT CHANGES;
 
-A_TRACTION, B_TRACTION, ASSIGN_TO_LING('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', B_TRACTION, 0.6),
+SELECT 
+ASSIGN_LING('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', w.TRACTION), COUNT(*) 
+FROM AGV_1_STREAM_WU w WINDOW TUMBLING (SIZE 24 HOUR) 
+GROUP BY ASSIGN_LING('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', w.TRACTION) EMIT CHANGES;
 
-ASSIGN_TO_LING('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 0.8)
-emit changes;
+-- MORE NONES IN THE ONE BELOW
+SELECT 
+ASSIGN_LING_MD('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', w.TRACTION, 0.7), COUNT(*) 
+FROM AGV_1_STREAM_WU w WINDOW TUMBLING (SIZE 24 HOUR) 
+GROUP BY ASSIGN_LING_MD('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', w.TRACTION, 0.7) EMIT CHANGES;
+
+-- DO NOT DISPLAY NONES
+SELECT 
+ASSIGN_LING_MD('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', w.TRACTION, 0.7), COUNT(*) 
+FROM AGV_1_STREAM_WU w WINDOW TUMBLING (SIZE 24 HOUR) 
+WHERE ASSIGN_LING_MD('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', w.TRACTION, 0.7) != 'none'
+GROUP BY ASSIGN_LING_MD('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', w.TRACTION, 0.7) EMIT CHANGES;
 
 -- FJOIN - TODO
 
 
+
+-- ASSIGN TEST
+select w.TRACTION, ASSIGN_LING('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', w.TRACTION) from AGV_1_STREAM_WU w emit changes;
 
 -- EXTENDED_AND
 
