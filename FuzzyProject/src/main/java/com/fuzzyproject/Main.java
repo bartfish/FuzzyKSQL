@@ -1,14 +1,7 @@
 package com.fuzzyproject;
 
-import com.fuzzyproject.functions.MathFunctionSwitcher;
-import com.fuzzyproject.functions.mixed.LinguisticDef;
-import com.fuzzyproject.fuzzyudfs.assign.AssignToLing;
-import com.fuzzyproject.fuzzyudfs.filtering.is.IsLing;
-import com.fuzzyproject.fuzzyudfs.filtering.is.MembershipDegree;
-import com.fuzzyproject.fuzzyudfs.filtering.operators.FAnd;
-import com.fuzzyproject.fuzzyudfs.filtering.operators.FAnd_Norm;
-import com.fuzzyproject.fuzzyudfs.filtering.operators.FOr;
-import com.fuzzyproject.fuzzyudfs.filtering.operators.FOr_Norm;
+import com.fuzzyproject.fuzzyudfs.assign.AssignLing;
+import com.fuzzyproject.fuzzyudfs.assign.AssignLingMDg;
 
 public class Main {
 
@@ -34,7 +27,9 @@ public class Main {
 
 //        System.out.println(IsLing.VerifyIs("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "high", 0.7));
 
-//        System.out.println(AssignToLing.AssignToLing("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 91.0, 0.7));
+        System.out.println(AssignLingMDg.AssignLingMDg("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 70.0, 0.7));
+        System.out.println(AssignLing.AssignLing("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 5.0));
+        System.out.println(AssignLing.AssignLing("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 21.0));
 
 //        System.out.println(FAnd.FAnd(IsLing.VerifyIs("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "high", 0.7),
 //                IsLing.VerifyIs("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "low", 0.7)));
@@ -43,7 +38,7 @@ public class Main {
 //                IsLing.VerifyIs("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "low", 0.7),
 //                IsLing.VerifyIs("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "high", 0.7)));
 
-        System.out.println("Membership degree " + MembershipDegree.MembershipDegreeGetter("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "high"));
+//        System.out.println("Membership degree " + MembershipDegree.MembershipDegreeGetter("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "high"));
 //        System.out.println("Membership degree " + MembershipDegree.MembershipDegreeGetter("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 45.0));
 //
 //        System.out.println(
@@ -51,8 +46,8 @@ public class Main {
 //                        MembershipDegree.MembershipDegreeGetter("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "high"),
 //                        MembershipDegree.MembershipDegreeGetter("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 69.50, "low")));
 ////
-        System.out.println(FOr_Norm.FOr(MembershipDegree.MembershipDegreeGetter("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "high"),
-                MembershipDegree.MembershipDegreeGetter("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 69.50, "high")));
+//        System.out.println(FOr_Norm.FOr(MembershipDegree.MembershipDegreeGetter("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "high"),
+//                MembershipDegree.MembershipDegreeGetter("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 69.50, "high")));
 
 
     }

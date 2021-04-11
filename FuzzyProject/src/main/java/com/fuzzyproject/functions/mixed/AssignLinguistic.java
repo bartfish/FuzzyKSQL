@@ -2,9 +2,7 @@ package com.fuzzyproject.functions.mixed;
 
 import com.fuzzyproject.functions.MathFunctionSwitcher;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class AssignLinguistic {
 
@@ -34,10 +32,18 @@ public class AssignLinguistic {
         // get the linguistic one which has the biggest value which is bigger than 0
         System.out.println(Collections.max(results.values()));
 
-        // if the biggest value is less than the verification coefficient, then no linguistic value can be assigned
-//        if (Collections.max(results.values()) < verificationCoeff) {
-//            return null;
-//        }
+        // check if all membership functions are unique
+        // if they are, then return 'none'
+        Set<Double> values = new HashSet<Double>(results.values());
+
+        boolean isUnique = values.size() == 1;
+        System.out.println("is unique = " + isUnique);
+
+        if (isUnique) {
+            return new AbstractMap.SimpleEntry<String, Double>("none", 0.0);
+        }
+
+        // if records are not the same then take the one with the highest value of the membership function
 
         // return the hashmap
         Map.Entry<String, Double> maxEntry = null;
@@ -49,9 +55,6 @@ public class AssignLinguistic {
                 maxEntry = entry;
             }
         }
-//        System.out.println(maxEntry.getKey());
-        // check the agreement coefficient for each function and verify which value is the closest
-
         // return the linguistic value of the given parameter
         return maxEntry;
     }

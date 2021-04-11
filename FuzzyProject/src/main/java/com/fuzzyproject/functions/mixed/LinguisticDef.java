@@ -6,7 +6,6 @@ import java.util.*;
 
 public class LinguisticDef {
 
-    // TODO: consider he linguistic value given
     public static Double getLinguisticWithValue(String payload, Double searchedValue, String linguisticValue) {
 
         // "low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100"
