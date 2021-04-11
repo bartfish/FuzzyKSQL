@@ -1,5 +1,6 @@
 package com.fuzzyproject;
 
+import com.fuzzyproject.fuzzyudfs.aggregations.FJoin;
 import com.fuzzyproject.fuzzyudfs.assign.AssignLing;
 import com.fuzzyproject.fuzzyudfs.assign.AssignLingMDg;
 
@@ -48,7 +49,9 @@ public class Main {
 ////
 //        System.out.println(FOr_Norm.FOr(MembershipDegree.MembershipDegreeGetter("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "high"),
 //                MembershipDegree.MembershipDegreeGetter("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 69.50, "high")));
-
+//        System.out.println(FJoin.FJoin(20.0, 10.0, 50.0, 10.0));
+//        System.out.println(FJoin.FJoin(20.0, 10.0, 30.0, 10.0));
+        System.out.println(FJoin.FJoin(10.0, 10.0, 25.0, 10.0));
 
     }
 
