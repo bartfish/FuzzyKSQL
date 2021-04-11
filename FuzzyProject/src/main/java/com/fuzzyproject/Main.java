@@ -27,9 +27,9 @@ public class Main {
 
 //        System.out.println(IsLing.VerifyIs("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "high", 0.7));
 
-        System.out.println(AssignLingMDg.AssignLingMDg("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 70.0, 0.7));
-        System.out.println(AssignLing.AssignLing("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 5.0));
-        System.out.println(AssignLing.AssignLing("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 21.0));
+//        System.out.println(AssignLingMDg.AssignLingMDg("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 70.0, 0.7));
+//        System.out.println(AssignLing.AssignLing("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 5.0));
+//        System.out.println(AssignLing.AssignLing("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 21.0));
 
 //        System.out.println(FAnd.FAnd(IsLing.VerifyIs("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "high", 0.7),
 //                IsLing.VerifyIs("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "low", 0.7)));

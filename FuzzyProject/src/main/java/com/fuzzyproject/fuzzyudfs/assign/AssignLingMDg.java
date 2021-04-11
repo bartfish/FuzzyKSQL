@@ -8,7 +8,7 @@ import io.confluent.ksql.function.udf.UdfDescription;
 
 import java.util.Map;
 
-@UdfDescription(name = "ASSIGN_MD", description = "assigns value to linguistic value or returns none if nothing fits")
+@UdfDescription(name = "ASSIGN_LING_MD", description = "assigns value to linguistic value or returns none if nothing fits")
 public class AssignLingMDg {
 
     @Udf(description = "Check whether value fits linguistic match defined in arguments")
