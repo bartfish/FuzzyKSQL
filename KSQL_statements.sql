@@ -125,6 +125,28 @@ WHERE ASSIGN_LING_MD('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;
 GROUP BY ASSIGN_LING_MD('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', w.TRACTION, 0.7) EMIT CHANGES;
 
 -- FJOIN - TODO
+select 
+    a.TRACTION,
+    b.TRACTION,
+    ASSIGN_LING_MD('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 0.8) as linguisticA,
+    ASSIGN_LING_MD('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', b.TRACTION, 0.8) as linguisticB
+from AGV_1_STREAM_wu a 
+inner join AGV_2_STREAM_wu b 
+within 7 days 
+on FUZZY_JOIN(a.TRACTION, 20, b.TRACTION, 20) > 0.3 
+emit changes;
+
+select 
+    a.TRACTION,
+    b.TRACTION,
+    ASSIGN_LING_MD('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', a.TRACTION, 0.8) as linguisticA,
+    ASSIGN_LING_MD('low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100', b.TRACTION, 0.8) as linguisticB
+from AGV_1_STREAM_wu a 
+inner join AGV_2_STREAM_wu b 
+within 7 days 
+on a.machineState = b.machineState 
+WHERE FUZZY_JOIN(a.TRACTION, 20, b.TRACTION, 20) > 0.1 
+emit changes;
 
 
 
