@@ -10,16 +10,17 @@ import io.confluent.ksql.function.udf.UdfDescription;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 @UdfDescription(name = "FUZZY_JOIN", description = "join values which are at the same level of membership function")
 public class FJoin {
 
-    private static final Double INCREMENT_PARAM = 0.01;
+    private static final Double INCREMENT_PARAM = 1.0;
 
     @Udf(description = "Check whether value fits linguistic match defined in arguments")
-    public static String FJoin(
+    public static Double FJoin(
             @UdfParameter(value = "value1", description = "searchedValue") final Double value1,
             @UdfParameter(value = "spreadvalue1", description = "searchedValue") final Double spreadValue1,
             @UdfParameter(value = "value2", description = "searchedValue") final Double value2,
@@ -52,29 +53,42 @@ public class FJoin {
             endX = rightSide1;
         }
 
-        while (startX <= endX) {
 
-            Double firstResult = Triangular.TriangularFunction(leftSide1, value1, rightSide1, startX);
-            Double secondResult = Triangular.TriangularFunction(leftSide2, value2, rightSide2, startX);
+//        System.out.println("value1e: " + value1 + " leftSide1: " + leftSide1 + " rightSide1: " + rightSide1);
+//        System.out.println("value2e: " + value2 + " leftSide2: " + leftSide2 + " rightSide2: " + rightSide2);
+        final int multiplicationFactor = 1000;
 
-            firstResult =  Math.floor(firstResult * 10) / 10;
-            secondResult = Math.floor(secondResult * 10) / 10;
+        Double startXx = startX * multiplicationFactor;
+        Double endXx = endX * multiplicationFactor;
 
-            System.out.println("startX: " + startX + " firstResult: " + firstResult + " secondResult: " + secondResult);
+        Double lSide1 = leftSide1 * multiplicationFactor;
+        Double rSide1 = rightSide1 * multiplicationFactor;
+        Double v1 = value1 * multiplicationFactor;
 
-            if (firstResult == secondResult) {
+        Double lSide2 = leftSide2 * multiplicationFactor;
+        Double rSide2 = rightSide2 * multiplicationFactor;
+        Double v2 = value2 * multiplicationFactor;
+
+        System.out.println("lSide1: " + lSide1 + " rSide1: " + rSide1 + " v1: " + v1 + " startXx: " + startXx);
+
+        for(Integer startValue = startXx.intValue(); startValue < endXx; startValue++) {
+            Double firstResult = Triangular.TriangularFunction(lSide1, v1, rSide1, startValue.doubleValue());
+            Double secondResult = Triangular.TriangularFunction(lSide2, v2, rSide2, startValue.doubleValue());
+
+//            System.out.println("startValue: " + startValue + " firstResult: " + firstResult + " secondResult: " + secondResult);
+
+            if (Double.compare(firstResult, secondResult) == 0) {
                 intersectionValues.add(firstResult);
             }
-
-            startX += INCREMENT_PARAM;
         }
-
-        System.out.println(intersectionValues);
-
+        if (intersectionValues.size() > 0) {
+            System.out.println(Collections.max(intersectionValues));
+            return Collections.max(intersectionValues);
+        }
+        return 0.0;
         // go from left most side of the first function to the right most of the other and search for a common points
         // if the do, then return membership degree (the common value)
         // otherwise, return membership degree equal to 0
-        return "string";
     }
 
 }
