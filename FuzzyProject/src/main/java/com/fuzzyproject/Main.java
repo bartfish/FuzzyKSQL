@@ -1,8 +1,10 @@
 package com.fuzzyproject;
 
+import com.fuzzyproject.functions.MathFunctionSwitcher;
 import com.fuzzyproject.fuzzyudfs.aggregations.FJoin;
 import com.fuzzyproject.fuzzyudfs.assign.AssignLing;
 import com.fuzzyproject.fuzzyudfs.assign.AssignLingMDg;
+import com.fuzzyproject.utils.GetStateName;
 
 public class Main {
 
@@ -25,6 +27,7 @@ public class Main {
 //        FunctionSwitcher.FunctionSwitch(MULTI_AREAS_WITH_LINGUISTICS);
 
 //        System.out.println(FunctionSwitcher.FunctionSwitchV("TRIA;50;80;150", 79.5));
+//        System.out.println(MathFunctionSwitcher.FunctionSwitchV("GAUS;0.5;12;", 3.0));
 
 //        System.out.println(IsLing.VerifyIs("low:TR_F;20;30;40;50/normal:TR_F;40;50;60;70/high:TR_F;50;80;90;100", 90.0, "high", 0.7));
 
@@ -53,6 +56,8 @@ public class Main {
 //        System.out.println(FJoin.FJoin(20.0, 10.0, 30.0, 10.0));
 //        System.out.println(FJoin.FJoin(10.0, 10.0, 21.0, 10.0));
 //        System.out.println(FJoin.FJoin(20.0, 10.0, 21.0, 10.0));
+
+        System.out.println(GetStateName.GetStateName(15, 10));
 
     }
 
