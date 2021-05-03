@@ -31,5 +31,8 @@ public class AutonomousGuidedVehicleOther {
     @JsonProperty
     public Integer machineId;
 
+    @JsonProperty
+    public Integer wheelsTemperature;
+    
 
 }
