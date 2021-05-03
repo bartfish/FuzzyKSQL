@@ -28,5 +28,8 @@ public class AutonomousGuidedVehicleOther {
     @JsonProperty
     public String weightUnit;
 
+    @JsonProperty
+    public Integer machineId;
+
 
 }

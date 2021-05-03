@@ -34,6 +34,7 @@ public class ProducerAGV {
                 agv.humidity = rand.nextDouble(); // 0 - 10 (0 means dry, 10 means a lot of water)
                 agv.batteryPercentageLeft = rand.nextDouble(); // 0 - 100 (battery lasting percentage)
                 agv.weightUnit = weightUnits.get(rand.nextInt(weightUnits.size() - 1));
+                agv.machineId = 1;
 
                 ProducerRecord<String, AutonomousGuidedVehicle> record
                         = new ProducerRecord<String, AutonomousGuidedVehicle>(topic, key, agv);
@@ -72,6 +73,7 @@ public class ProducerAGV {
                 agv.batteryPercentageLeft = rand.nextDouble(); // 0 - 100 (battery lasting percentage)
                 agv.weightValue =  rand.nextDouble();
                 agv.weightUnit = weightUnits.get(rand.nextInt(weightUnits.size() - 1));
+                agv.machineId = 1;
 
                 ProducerRecord<String, AutonomousGuidedVehicleOther> record
                         = new ProducerRecord<String, AutonomousGuidedVehicleOther>(topic, key, agv);

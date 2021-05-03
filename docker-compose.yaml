@@ -82,7 +82,7 @@ services:
       CONNECT_LOG4J_LOGGERS: org.apache.zookeeper=ERROR,org.I0Itec.zkclient=ERROR,org.reflections=ERROR
 
   ksqldb-server:
-    image: confluentinc/ksqldb-server:0.14.0
+    image: confluentinc/ksqldb-server:0.17.0
     hostname: ksqldb-server
     container_name: ksqldb-server
     depends_on:
@@ -111,7 +111,7 @@ services:
       KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: "true"
 
   ksqldb-cli:
-    image: confluentinc/ksqldb-cli:0.14.0
+    image: confluentinc/ksqldb-cli:0.17.0
     container_name: ksqldb-cli
     depends_on:
       - broker
