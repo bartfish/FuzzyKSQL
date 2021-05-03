@@ -32,7 +32,7 @@ public class AutonomousGuidedVehicleOther {
     public Integer machineId;
 
     @JsonProperty
-    public Integer wheelsTemperature;
+    public Double wheelsTemperature;
     
 
 }

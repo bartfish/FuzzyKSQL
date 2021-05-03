@@ -9,6 +9,7 @@ public class Main {
 
 //        System.out.println(args[0] + " " + args[1]);
 //        System.out.println("Chose: " + args[0] + " topicName: " + args[1] + " numberOfMessagesPerSecond: " + args[2]);
+
         ProducerAGV.KSProducer();
 
 
