@@ -71,16 +71,16 @@ public class ProducerAGV {
 //                System.out.println(timeWatch.getTime() + " " + agv.wheelsTemperature);
 //                System.out.println("======================================================================");
 
-//                ProducerRecord<String, AutonomousGuidedVehicle> record
-//                        = new ProducerRecord<String, AutonomousGuidedVehicle>(topic, key, agv);
-//                try {
-//                    producer.send(record).get();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                } catch (ExecutionException e) {
-//                    e.printStackTrace();
-//                }
-                printObjectAsJson(agv);
+                ProducerRecord<String, AutonomousGuidedVehicle> record
+                        = new ProducerRecord<String, AutonomousGuidedVehicle>(topic, key, agv);
+                try {
+                    producer.send(record).get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+//                printObjectAsJson(agv);
                 System.out.println(agv);
             }
         };
