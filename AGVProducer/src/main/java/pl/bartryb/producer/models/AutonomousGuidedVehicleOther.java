@@ -1,38 +1,52 @@
 package pl.bartryb.producer.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.joda.time.DateTime;
+
+import java.math.BigDecimal;
 
 public class AutonomousGuidedVehicleOther {
 
     @JsonProperty
-    public Double traction;
+    public Integer CRC;
 
     @JsonProperty
-    public double longtitute;
+    public Integer Id;
 
     @JsonProperty
-    public double latitude;
+    public Integer MomentaryConsumption1;
 
     @JsonProperty
-    public Double batteryPercentageLeft;
+    public Integer MomentaryConsumption2;
 
     @JsonProperty
-    public String machineState;
+    public Integer MomentaryConsumption3;
 
     @JsonProperty
-    public Double humidity;
+    public Double CumulativeEnergyConsumption1;
 
     @JsonProperty
-    public Double weightValue;
+    public Double CumulativeEnergyConsumption2;
 
     @JsonProperty
-    public String weightUnit;
+    public Double CumulativeEnergyConsumption3;
 
     @JsonProperty
-    public Integer machineId;
+    public Integer RawInputMeasurement1;
 
     @JsonProperty
-    public Double wheelsTemperature;
-    
+    public Integer RawInputMeasurement2;
+
+    @JsonProperty
+    public Integer RawInputMeasurement3;
+
+    @JsonProperty
+    public Integer CycleCounterNoOk;
+
+    @JsonProperty
+    public Integer CycleCounterOk;
+
+    @JsonProperty
+    public DateTime Timestamp;
 
 }

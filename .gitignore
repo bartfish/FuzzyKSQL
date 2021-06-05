@@ -18,3 +18,13 @@ FuzzyProject/target/maven-status/maven-compiler-plugin/compile/default-compile/i
 FuzzyProject/target/maven-archiver/pom.properties
 FuzzyProject/target/
 FuzzyProject/target/maven-archiver/pom.properties
+AGVProducer/target/classes/pl/bartryb/producer/Main.class
+AGVProducer/target/classes/pl/bartryb/producer/ProducerAGV.class
+AGVProducer/target/classes/pl/bartryb/producer/ProducerAGV$1.class
+AGVProducer/target/classes/pl/bartryb/producer/ProducerAGV$2.class
+AGVProducer/target/classes/pl/bartryb/producer/configs/ProducerConfig.class
+AGVProducer/target/classes/pl/bartryb/producer/models/AutonomousGuidedVehicle.class
+AGVProducer/target/classes/pl/bartryb/producer/models/AutonomousGuidedVehicleOther.class
+
+./AGVProducer/target/
+*/target/**
