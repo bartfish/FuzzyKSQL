@@ -86,7 +86,7 @@ public class ProducerAGV {
         };
         Timer timer = new Timer();
         long delay = 0;
-        long intevalPeriod = 1 * 1000;
+        long intevalPeriod = 1 * 3500;
 
         // schedules the task to be run in an interval
         timer.scheduleAtFixedRate(task, delay,
@@ -140,7 +140,7 @@ public class ProducerAGV {
         };
         Timer timer = new Timer();
         long delay = 0;
-        long intevalPeriod = 1 * 1500;
+        long intevalPeriod = 1 * 3000;
 
         // schedules the task to be run in an interval
         timer.scheduleAtFixedRate(task, delay,
