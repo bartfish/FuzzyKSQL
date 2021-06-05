@@ -101,38 +101,41 @@ public class ProducerAGV {
                 Random rand = new Random();
                 // task to run goes here
                 AutonomousGuidedVehicleOther agv = new AutonomousGuidedVehicleOther();
-                agv.traction = rand.nextDouble() * 100; // 0 - 100
-                agv.latitude = rand.nextDouble() * 60; // 50.0000001
-                agv.longtitute = rand.nextDouble() * 60; // 50.0000001
-                agv.machineState = machineStates.get(rand.nextInt(3)); // STANDBY, WORKING, BROKEN, LOST_CONNECTION, LOST
-                agv.humidity = rand.nextDouble(); // 0 - 10 (0 means dry, 10 means a lot of water)
-                agv.batteryPercentageLeft = rand.nextDouble(); // 0 - 100 (battery lasting percentage)
-                agv.weightValue =  rand.nextDouble();
-                agv.weightUnit = weightUnits.get(rand.nextInt(weightUnits.size() - 1));
-                agv.machineId = 1;
-                if (timeWatch.getTime() <= 120000 && timeWatch.getTime() >= 60000) {
-                    agv.wheelsTemperature = 20 + (50-20) * rand.nextDouble();
-                }
-                else if (timeWatch.getTime() < 60000 && timeWatch.getTime() >= 0) {
-                    agv.wheelsTemperature = 50 + (80 - 50) * rand.nextDouble();
-                } else {
-                    timeWatch.stop();
-                    timeWatch.reset();
-                    timeWatch.start();
-                }
-//                System.out.println("======================================================================");
-//                System.out.println(timeWatch.getTime() + " " + agv.wheelsTemperature);
-//                System.out.println("======================================================================");
+                agv.CumulativeEnergyConsumption1 = rand.nextDouble() * 5000; // 0 - 100
+                agv.CumulativeEnergyConsumption2 = rand.nextDouble() * 10000; // 0 - 100
+                agv.CumulativeEnergyConsumption3 = rand.nextDouble() * 5000; // 0 - 100
+                agv.MomentaryConsumption1 = rand.nextInt(300);
+                agv.MomentaryConsumption2 = rand.nextInt(1000);
+                agv.MomentaryConsumption3 = rand.nextInt(500);
+                agv.RawInputMeasurement1 = rand.nextInt(1000);
+                agv.RawInputMeasurement2 = rand.nextInt(500);
+                agv.RawInputMeasurement3 = rand.nextInt(10000);
 
-//               ProducerRecord<String, AutonomousGuidedVehicleOther> record
-//                       = new ProducerRecord<String, AutonomousGuidedVehicleOther>(topic, key, agv);
-//               try {
-//                   producer.send(record).get();
-//               } catch (InterruptedException e) {
-//                   e.printStackTrace();
-//               } catch (ExecutionException e) {
-//                   e.printStackTrace();
-//               }
+                agv.CycleCounterOk = ++generalCounter;
+
+            //     if (timeWatch.getTime() <= 120000 && timeWatch.getTime() >= 60000) {
+            //         agv.wheelsTemperature = 20 + (50-20) * rand.nextDouble();
+            //     }
+            //     else if (timeWatch.getTime() < 60000 && timeWatch.getTime() >= 0) {
+            //         agv.wheelsTemperature = 50 + (80 - 50) * rand.nextDouble();
+            //     } else {
+            //         timeWatch.stop();
+            //         timeWatch.reset();
+            //         timeWatch.start();
+            //     }
+            //    System.out.println("======================================================================");
+            //    System.out.println(timeWatch.getTime() + " " + agv.wheelsTemperature);
+            //    System.out.println("======================================================================");
+
+              ProducerRecord<String, AutonomousGuidedVehicleOther> record
+                      = new ProducerRecord<String, AutonomousGuidedVehicleOther>(topic, key, agv);
+              try {
+                  producer.send(record).get();
+              } catch (InterruptedException e) {
+                  e.printStackTrace();
+              } catch (ExecutionException e) {
+                  e.printStackTrace();
+              }
             }
         };
         Timer timer = new Timer();
@@ -156,10 +159,10 @@ public class ProducerAGV {
             KafkaProducer<String, AutonomousGuidedVehicle> producer = new KafkaProducer<>(props);
             KafkaProducer<String, AutonomousGuidedVehicleOther> producerOther = new KafkaProducer<>(props);
 
-            String topic1 = "AGV_1";
+            String topic1 = "NEW_AGV_1";
             String key1 = "testkey1";
 
-            String topic2 = "AGV_2";
+            String topic2 = "NEW_AGV_2";
             String key2 = "testkey2";
 
             StopWatch timeWatch = new StopWatch();
