@@ -54,7 +54,8 @@ public class ProducerAGV {
                 agv.RawInputMeasurement1 = rand.nextInt(1000);
                 agv.RawInputMeasurement2 = rand.nextInt(500);
                 agv.RawInputMeasurement3 = rand.nextInt(10000);
-
+                agv.Id = rand.nextInt(2);
+                
                 agv.CycleCounterOk = ++generalCounter;
 //                if (timeWatch.getTime() <= 120000 && timeWatch.getTime() >= 60000) {
 //                    agv.wheelsTemperature = 20 + (50-20) * rand.nextDouble();
@@ -86,7 +87,7 @@ public class ProducerAGV {
         };
         Timer timer = new Timer();
         long delay = 0;
-        long intevalPeriod = 1 * 3500;
+        long intevalPeriod = 1 * 500;
 
         // schedules the task to be run in an interval
         timer.scheduleAtFixedRate(task, delay,
@@ -110,6 +111,7 @@ public class ProducerAGV {
                 agv.RawInputMeasurement1 = rand.nextInt(1000);
                 agv.RawInputMeasurement2 = rand.nextInt(500);
                 agv.RawInputMeasurement3 = rand.nextInt(10000);
+                agv.Id = rand.nextInt(2);
 
                 agv.CycleCounterOk = ++generalCounter;
 
@@ -140,7 +142,7 @@ public class ProducerAGV {
         };
         Timer timer = new Timer();
         long delay = 0;
-        long intevalPeriod = 1 * 3000;
+        long intevalPeriod = 1 * 1000;
 
         // schedules the task to be run in an interval
         timer.scheduleAtFixedRate(task, delay,
