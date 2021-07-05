@@ -21,11 +21,15 @@ public class FJoin {
 
     @Udf(description = "Check whether value fits linguistic match defined in arguments")
     public static Double FJoin(
-            @UdfParameter(value = "value1", description = "searchedValue") final Double value1,
+            @UdfParameter(value = "value1", description = "searchedValue") Double value1,
             @UdfParameter(value = "spreadvalue1", description = "searchedValue") final Double spreadValue1,
-            @UdfParameter(value = "value2", description = "searchedValue") final Double value2,
+            @UdfParameter(value = "value2", description = "searchedValue") Double value2,
             @UdfParameter(value = "spreadvalue1", description = "searchedValue") final Double spreadValue2
     ) {
+
+        // convert to 2 decimal places
+        value1 = Math.floor(value1 * 100) / 100;
+        value2 = Math.floor(value2 * 100) / 100;;
 
         // create triangular range based on value and spreadvalue
         // the first triangle
