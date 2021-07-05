@@ -91,16 +91,37 @@ EMIT CHANGES;
 
 
 
--- 5
+-- 5 - FUZZY
 SELECT 
     a.ID,
     b.ID,
-    FUZZY_JOIN(a.CumulativeEnergyConsumption3, 1000.0, b.CumulativeEnergyConsumption3, 1000.0),
+    FUZZY_JOIN(a.CumulativeEnergyConsumption3, 1000.0, b.CumulativeEnergyConsumption3, 1000.0) AS MEMBERSHIP_DEGREE,
     a.CumulativeEnergyConsumption3,
-    b.CumulativeEnergyConsumption3,
-    a.CumulativeEnergyConsumption3 - b.CumulativeEnergyConsumption3,
-    ASSIGN_LING_MD('low:TR_F;500;1500;2000;2500/normal:TR_F;2100;2400;3000;3500/high:TR_F;3900;4200;4500;5000', a.CumulativeEnergyConsumption3, 0.7) as linguisticA,
-    ASSIGN_LING_MD('low:TR_F;500;1500;2000;2500/normal:TR_F;2100;2400;3000;3500/high:TR_F;3900;4200;4500;5000', b.CumulativeEnergyConsumption3, 0.7) as linguisticB
+    b.CumulativeEnergyConsumption3
 FROM NEW_AGV_1_STREAM a 
 JOIN NEW_AGV_2_STREAM b WITHIN 7 DAYS ON a.ID = b.ID
+WHERE FUZZY_JOIN(a.CumulativeEnergyConsumption3, 1000.0, b.CumulativeEnergyConsumption3, 1000.0) > 0.7
 EMIT CHANGES;
+
+-- crisp approach here is impossible
+-- 6 - fuzzy - STATE DETECTION
+CREATE TABLE THE_STATE_DETECTION AS
+SELECT     
+      TIMESTAMPTOSTRING(WINDOWSTART,'yyyy-MM-dd HH:mm:ss','Europe/London') AS WINDOW_START_TS,  
+      ASSIGN_LING_MD('safe:TR_F;500;1500;2000;2500/alarm:TR_F;3900;4200;4500;5000', s.CumulativeEnergyConsumption1, 0.99) AS STATE_NAME,
+      COUNT(ASSIGN_LING_MD('safe:TR_F;500;1500;2000;2500/alarm:TR_F;3900;4200;4500;5000', s.CumulativeEnergyConsumption1, 0.99)) AS SAFE_COUNTER
+    FROM NEW_AGV_1_STREAM s 
+    WINDOW HOPPING(SIZE 1 MINUTE, ADVANCE BY 10 SECONDS)            
+    WHERE ASSIGN_LING_MD('safe:TR_F;500;1500;2000;2500/alarm:TR_F;3900;4200;4500;5000', s.CumulativeEnergyConsumption1, 0.99) != 'none'
+    GROUP BY ASSIGN_LING_MD('safe:TR_F;500;1500;2000;2500/alarm:TR_F;3900;4200;4500;5000', s.CumulativeEnergyConsumption1, 0.99)
+    HAVING COUNT(ASSIGN_LING_MD('safe:TR_F;500;1500;2000;2500/alarm:TR_F;3900;4200;4500;5000', s.CumulativeEnergyConsumption1, 0.99)) > 3
+   EMIT CHANGES;
+
+SELECT 
+    STATE_NAME,
+    (CASE WHEN (STATE_NAME = 'safe' AND SAFE_COUNTER >= 4) THEN 'SAFE STATE TURNED ON!' ELSE '' END) AS SAFE_MESSAGE,
+    (CASE WHEN (STATE_NAME = 'alarm' AND SAFE_COUNTER >= 4) THEN 'ALARM STATE TURNED ON!' ELSE '' END) AS ALARM_MESSAGE,
+    WINDOW_START_TS,
+    SAFE_COUNTER
+    FROM THE_STATE_DETECTION
+    EMIT CHANGES; 
