@@ -47,7 +47,7 @@ select * from NEW_AGV_1_STREAM w WHERE (AROUND_TRAPEZ_R('LET', w.CumulativeEnerg
 -- AROUND_GAUSS
 select * from NEW_AGV_1_STREAM w WHERE (AROUND_GAUSS('LET', w.CumulativeEnergyConsumption1, 4000, 1000) > 0.9) EMIT CHANGES; -- OK
 
-select * from NEW_AGV_1_STREAM w WHERE (AROUND('TRIA;1000;4500;5000', w.CumulativeEnergyConsumption1) > 0.6) EMIT CHANGES; -- OK
+select * from NEW_AGV_1_STREAM w WHERE (AROUND('TRIA;1000;4500;5000', w.CumulativeEnergyConsumption1) > 0.8) EMIT CHANGES; -- OK
 select * from NEW_AGV_1_STREAM w WHERE (AROUND('TR_F;500;3700;4700;5000', w.CumulativeEnergyConsumption1) > 0.6) EMIT CHANGES; -- OK
 select * from NEW_AGV_1_STREAM w WHERE (AROUND('TR_L;4000;4900', w.CumulativeEnergyConsumption1) > 0.6) EMIT CHANGES; -- OK
 select * from NEW_AGV_1_STREAM w WHERE (AROUND('TR_R;3900;4500;', w.CumulativeEnergyConsumption1) > 0.6) EMIT CHANGES; -- OK
@@ -64,6 +64,17 @@ select
     GET_MEMBERSHIP_DEGREE('low:TR_F;500;1500;2000;2500/normal:TR_F;2100;2400;3000;3500/high:TR_F;3900;4200;4500;5000', a.CumulativeEnergyConsumption1, 'high') AS HIGH
 from NEW_AGV_1_STREAM a 
 where ASSIGN_LING_MD('low:TR_F;500;1500;2000;2500/normal:TR_F;2100;2400;3000;3500/high:TR_F;3900;4200;4500;5000', a.CumulativeEnergyConsumption1, 0.7) != 'none'
+emit changes;
+
+select 
+    a.CumulativeEnergyConsumption1, 
+    ASSIGN_LING_MD('low:TR_F;500;1500;2000;2500/normal:TR_F;2100;2400;3000;3500/high:TR_F;3900;4200;4500;5000', a.CumulativeEnergyConsumption1, 0.7) as linguisticA,
+    GET_MEMBERSHIP_DEGREE('low:TR_F;500;1500;2000;2500/normal:TR_F;2100;2400;3000;3500/high:TR_F;3900;4200;4500;5000', a.CumulativeEnergyConsumption1, 'low') AS LOW,
+    GET_MEMBERSHIP_DEGREE('low:TR_F;500;1500;2000;2500/normal:TR_F;2100;2400;3000;3500/high:TR_F;3900;4200;4500;5000', a.CumulativeEnergyConsumption1, 'normal') AS NORMAL,
+    GET_MEMBERSHIP_DEGREE('low:TR_F;500;1500;2000;2500/normal:TR_F;2100;2400;3000;3500/high:TR_F;3900;4200;4500;5000', a.CumulativeEnergyConsumption1, 'high') AS HIGH
+from NEW_AGV_1_STREAM a 
+where 
+ASSIGN_LING_MD('low:TR_F;500;1500;2000;2500/normal:TR_F;2100;2400;3000;3500/high:TR_F;3900;4200;4500;5000', a.CumulativeEnergyConsumption1, 0.7) = 'high'
 emit changes;
 
 -- FUZZY JOIN based on linguistic assignments
