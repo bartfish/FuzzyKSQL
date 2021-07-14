@@ -1,12 +1,26 @@
 -- 1
 
 -- AROUND_TRIANGULAR
-select ID as MACHINE_ID, w.CumulativeEnergyConsumption1, w.CumulativeEnergyConsumption2 from NEW_AGV_1_STREAM w WHERE (AROUND_TRIANGULAR('LET', w.CumulativeEnergyConsumption1, 1000, 5000, 4500) > 0.8) EMIT CHANGES; -- OK
+SELECT 
+    ID as MACHINE_ID, 
+    w.CumulativeEnergyConsumption1, 
+    w.CumulativeEnergyConsumption2,
+    AROUND_TRIANGULAR('LET', w.CumulativeEnergyConsumption1, 1000, 5000, 4500)AS MEMBERSHIP_DEGREE
+FROM NEW_AGV_1_STREAM w WHERE (AROUND_TRIANGULAR('LET', w.CumulativeEnergyConsumption1, 1000, 5000, 4500) > 0.8) 
+EMIT CHANGES; -- OK
 -- select * from AGV_1_STREAM_WU w WHERE (AROUND_TRIANGULAR('CONST', w.TRACTION) > 0.6) EMIT CHANGES; -- TO BE IMPLEMENTED AND TESTED
 
 -- AROUND_TRAPEZ
-select ID as MACHINE_ID, w.CumulativeEnergyConsumption1, w.CumulativeEnergyConsumption2 from NEW_AGV_1_STREAM w WHERE (AROUND_TRAPEZ('LET', w.CumulativeEnergyConsumption1, 1000, 3500, 4500, 5000) > 0.8) EMIT CHANGES; -- OK
+select ID as MACHINE_ID, w.CumulativeEnergyConsumption1, w.CumulativeEnergyConsumption2 from NEW_AGV_1_STREAM w 
+WHERE (AROUND_TRAPEZ('LET', w.CumulativeEnergyConsumption1, 1000, 3500, 4500, 5000) > 0.8) EMIT CHANGES; -- OK
 
+SELECT 
+    ID as MACHINE_ID, 
+    w.CumulativeEnergyConsumption1, 
+    w.CumulativeEnergyConsumption2,
+    AROUND_TRAPEZ('LET', w.CumulativeEnergyConsumption1, 1000, 3500, 4500, 5000) AS MEMBERSHIP_DEGREE
+FROM NEW_AGV_1_STREAM w WHERE (AROUND_TRAPEZ('LET', w.CumulativeEnergyConsumption1, 1000, 3500, 4500, 5000) > 0.8) 
+EMIT CHANGES;
 -- 2
 
 --2.1
@@ -33,6 +47,14 @@ from NEW_AGV_1_STREAM a
 where 
 ASSIGN_LING_MD('low:TR_F;500;1500;2000;2500/normal:TR_F;2100;2400;3000;3500/high:TR_F;3900;4200;4500;5000', a.CumulativeEnergyConsumption1, 0.7) = 'high'
 emit changes;
+
+SELECT 
+    a.CumulativeEnergyConsumption1, 
+    ASSIGN_LING_MD('low:TR_F;500;1500;2000;2500/normal:TR_F;2100;2400;3000;3500/high:TR_F;3900;4200;4500;5000', a.CumulativeEnergyConsumption1, 0.7) as linguisticA,
+    GET_MEMBERSHIP_DEGREE('low:TR_F;500;1500;2000;2500/normal:TR_F;2100;2400;3000;3500/high:TR_F;3900;4200;4500;5000', a.CumulativeEnergyConsumption1, 'high') AS MEMBERSHIP_DEGREE
+FROM NEW_AGV_1_STREAM a 
+WHERE ASSIGN_LING_MD('low:TR_F;500;1500;2000;2500/normal:TR_F;2100;2400;3000;3500/high:TR_F;3900;4200;4500;5000', a.CumulativeEnergyConsumption1, 0.7) = 'high'
+EMIT CHANGES;
 
 
 -- 2.2 crisp
