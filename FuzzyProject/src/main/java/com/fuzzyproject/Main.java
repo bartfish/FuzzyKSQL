@@ -55,7 +55,7 @@ public class Main {
 //        System.out.println(FJoin.FJoin(20.0, 10.0, 50.0, 10.0));
 //        System.out.println(FJoin.FJoin(20.0, 10.0, 30.0, 10.0));
 //        System.out.println(FJoin.FJoin(10.0, 10.0, 21.0, 10.0));
-        System.out.println(FJoin.FJoin(1155.5915585215937, 50.0, 1128.05071379641173, 50.0));
+        System.out.println(FJoin.FJoin(2386.8225023327886, 1500.0, 1612.9815141524707, 1500.0));
 
 //        System.out.println(GetStateName.GetStateName(15, 10));
 

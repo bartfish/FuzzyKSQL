@@ -2,21 +2,31 @@ package pl.bartryb.producer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.avro.util.RandomData;
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.kafka.common.serialization.LongSerializer;
-import org.apache.kafka.common.serialization.StringSerializer;
+import org.jboss.netty.util.internal.ThreadLocalRandom;
 import pl.bartryb.producer.models.AutonomousGuidedVehicle;
 import pl.bartryb.producer.models.AutonomousGuidedVehicleOther;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.math3.random.RandomDataImpl;
 
 public class ProducerAGV {
+
+    private static long getRandomYearMillisecond(LocalDate min, LocalDate max) {
+        Date d1 = Date.from(min.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date d2 = Date.from(max.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        RandomDataImpl randomData = new RandomDataImpl();
+
+        return randomData.nextLong(d1.getTime(), d2.getTime());
+    }
 
     private static List<String> machineStates = Arrays.asList(new String[] { "STANDBY", "WORKING", "BROKEN", "OFFLINE"});
     private static List<String> weightUnits = Arrays.asList(new String[]
@@ -24,7 +34,6 @@ public class ProducerAGV {
 
     private static void printObjectAsJson(Object agv) {
         ObjectMapper mapper = new ObjectMapper();
-        //Converting the Object to JSONString
         String jsonString = null;
         try {
             jsonString = mapper.writeValueAsString(agv);
@@ -36,6 +45,9 @@ public class ProducerAGV {
     }
 
     private static int generalCounter = 0;
+
+    private static LocalDate minDate = LocalDate.of(2020, 7, 1);
+    private static LocalDate maxDate = LocalDate.of(2021, 7, 1);
 
     private static void defineStream1(KafkaProducer<String, AutonomousGuidedVehicle> producer, String topic, String key, StopWatch timeWatch) {
         TimerTask task = new TimerTask() {
@@ -55,22 +67,9 @@ public class ProducerAGV {
                 agv.RawInputMeasurement2 = rand.nextInt(500);
                 agv.RawInputMeasurement3 = rand.nextInt(10000);
                 agv.Id = rand.nextInt(2);
+                agv.TimestampMilliseconds = getRandomYearMillisecond(minDate, maxDate);
                 
                 agv.CycleCounterOk = ++generalCounter;
-//                if (timeWatch.getTime() <= 120000 && timeWatch.getTime() >= 60000) {
-//                    agv.wheelsTemperature = 20 + (50-20) * rand.nextDouble();
-//                }
-//                else if (timeWatch.getTime() < 60000 && timeWatch.getTime() >= 0) {
-//                    agv.wheelsTemperature = 50 + (85-50) * rand.nextDouble();
-//                } else {
-//                    timeWatch.stop();
-//                    timeWatch.reset();
-//                    timeWatch.start();
-//                }
-
-//                System.out.println("======================================================================");
-//                System.out.println(timeWatch.getTime() + " " + agv.wheelsTemperature);
-//                System.out.println("======================================================================");
 
                 ProducerRecord<String, AutonomousGuidedVehicle> record
                         = new ProducerRecord<String, AutonomousGuidedVehicle>(topic, key, agv);
@@ -82,7 +81,7 @@ public class ProducerAGV {
                     e.printStackTrace();
                 }
 //                printObjectAsJson(agv);
-                System.out.println(agv);
+//                System.out.println(agv);
             }
         };
         Timer timer = new Timer();
@@ -112,22 +111,10 @@ public class ProducerAGV {
                 agv.RawInputMeasurement2 = rand.nextInt(500);
                 agv.RawInputMeasurement3 = rand.nextInt(10000);
                 agv.Id = rand.nextInt(2);
-
+                agv.TimestampMilliseconds = getRandomYearMillisecond(minDate, maxDate);
                 agv.CycleCounterOk = ++generalCounter;
 
-            //     if (timeWatch.getTime() <= 120000 && timeWatch.getTime() >= 60000) {
-            //         agv.wheelsTemperature = 20 + (50-20) * rand.nextDouble();
-            //     }
-            //     else if (timeWatch.getTime() < 60000 && timeWatch.getTime() >= 0) {
-            //         agv.wheelsTemperature = 50 + (80 - 50) * rand.nextDouble();
-            //     } else {
-            //         timeWatch.stop();
-            //         timeWatch.reset();
-            //         timeWatch.start();
-            //     }
-            //    System.out.println("======================================================================");
-            //    System.out.println(timeWatch.getTime() + " " + agv.wheelsTemperature);
-            //    System.out.println("======================================================================");
+//                printObjectAsJson(agv);
 
               ProducerRecord<String, AutonomousGuidedVehicleOther> record
                       = new ProducerRecord<String, AutonomousGuidedVehicleOther>(topic, key, agv);
@@ -157,7 +144,7 @@ public class ProducerAGV {
             props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
             props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, "io.confluent.kafka.serializers.json.KafkaJsonSchemaSerializer");
             props.put("schema.registry.url", "http://localhost:8081");
-//
+
             KafkaProducer<String, AutonomousGuidedVehicle> producer = new KafkaProducer<>(props);
             KafkaProducer<String, AutonomousGuidedVehicleOther> producerOther = new KafkaProducer<>(props);
 

@@ -49,4 +49,7 @@ public class AutonomousGuidedVehicle {
     @JsonProperty
     public DateTime Timestamp;
 
+    @JsonProperty
+    public long TimestampMilliseconds;
+
 }
