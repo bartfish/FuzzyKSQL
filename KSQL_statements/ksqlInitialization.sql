@@ -12,7 +12,8 @@ CREATE STREAM NEW_AGV_1_STREAM
     RawInputMeasurement3 INTEGER,
     CycleCounterNoOk INTEGER,
     CycleCounterOk INTEGER,
-Timestamp INTEGER) WITH (KAFKA_TOPIC='NEW_AGV_1', VALUE_FORMAT='JSON_SR');
+    Timestamp INTEGER,
+    TimestampMilliseconds BIGINT) WITH (KAFKA_TOPIC='AGV_1_DEVICE', VALUE_FORMAT='JSON_SR');
 
 CREATE STREAM NEW_AGV_2_STREAM 
 (Id INTEGER,
@@ -27,7 +28,8 @@ CREATE STREAM NEW_AGV_2_STREAM
     RawInputMeasurement3 INTEGER,
     CycleCounterNoOk INTEGER,
     CycleCounterOk INTEGER,
-Timestamp INTEGER) WITH (KAFKA_TOPIC='NEW_AGV_2', VALUE_FORMAT='JSON_SR');
+    TimestampMilliseconds BIGINT,
+Timestamp INTEGER) WITH (KAFKA_TOPIC='AGV_2_DEVICE', VALUE_FORMAT='JSON_SR');
 
 -- FUZZY APPROACH:
 
@@ -91,13 +93,29 @@ ASSIGN_LING_MD('low:TR_F;500;1500;2000;2500/normal:TR_F;2100;2400;3000;3500/high
 where ASSIGN_LING_MD('low:TR_F;500;1500;2000;2500/normal:TR_F;2100;2400;3000;3500/high:TR_F;3900;4200;4500;5000', b.CumulativeEnergyConsumption1, 0.7) != 'none' 
 emit changes;
 
+-- FUZZY JOIN based on linguistic assignments - TIMESTAMP EXAMPLE
+select 
+    a.CumulativeEnergyConsumption1,
+    b.CumulativeEnergyConsumption1,
+    a.TIMESTAMPMILLISECONDS,
+    b.TIMESTAMPMILLISECONDS,
+    ASSIGN_LING_MD('low:TR_F;500;1500;2000;2500/normal:TR_F;2100;2400;3000;3500/high:TR_F;3900;4200;4500;5000', a.CumulativeEnergyConsumption1, 0.7) as linguisticA,
+    ASSIGN_LING_MD('low:TR_F;500;1500;2000;2500/normal:TR_F;2100;2400;3000;3500/high:TR_F;3900;4200;4500;5000', b.CumulativeEnergyConsumption1, 0.7) as linguisticB
+from NEW_AGV_1_STREAM a 
+inner join NEW_AGV_2_STREAM b 
+within 7 days 
+on 
+ASSIGN_LING_MD('low:TR_F;500;1500;2000;2500/normal:TR_F;2100;2400;3000;3500/high:TR_F;3900;4200;4500;5000', a.CumulativeEnergyConsumption1, 0.7) = ASSIGN_LING_MD('low:TR_F;500;1500;2000;2500/normal:TR_F;2100;2400;3000;3500/high:TR_F;3900;4200;4500;5000', b.CumulativeEnergyConsumption1, 0.6) 
+where ASSIGN_LING_MD('low:TR_F;500;1500;2000;2500/normal:TR_F;2100;2400;3000;3500/high:TR_F;3900;4200;4500;5000', b.CumulativeEnergyConsumption1, 0.7) != 'none' 
+emit changes;
+
 
 --  FUZZY IS
 select * from NEW_AGV_2_STREAM a where VERIFY_IS('low:TR_F;500;1500;2000;2500/normal:TR_F;2100;2400;3000;3500/high:TR_F;3900;4200;4500;5000', a.CumulativeEnergyConsumption1, 'normal', 0.4) emit changes; 
 
 select * from NEW_AGV_1_STREAM a
 where FUZZY_AND(
-    GET_MEMBERSHIP_DEGREE('low:TR_F;500;1500;2000;2500/normal:TR_F;2100;2400;3000;3500/high:TR_F;3900;4200;4500;5000', a.CumulativeEnergyConsumption1, 'high'),
+    GET_MEMBERSHIP_DEGREE('low:T R_F;500;1500;2000;2500/normal:TR_F;2100;2400;3000;3500/high:TR_F;3900;4200;4500;5000', a.CumulativeEnergyConsumption1, 'high'),
     GET_MEMBERSHIP_DEGREE('low:TR_F;500;1500;2000;2500/normal:TR_F;2100;2400;3000;3500/high:TR_F;3900;4200;4500;5000', a.CumulativeEnergyConsumption3, 'low')
 ) > 0.5 emit changes;
 
