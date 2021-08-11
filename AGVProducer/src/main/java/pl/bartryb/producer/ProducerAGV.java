@@ -148,10 +148,10 @@ public class ProducerAGV {
             KafkaProducer<String, AutonomousGuidedVehicle> producer = new KafkaProducer<>(props);
             KafkaProducer<String, AutonomousGuidedVehicleOther> producerOther = new KafkaProducer<>(props);
 
-            String topic1 = "AGV_1_DEVICE";
+            String topic1 = "AGV1_DEVICE";
             String key1 = "testkey1";
 
-            String topic2 = "AGV_2_DEVICE";
+            String topic2 = "AGV2_DEVICE";
             String key2 = "testkey2";
 
             StopWatch timeWatch = new StopWatch();
