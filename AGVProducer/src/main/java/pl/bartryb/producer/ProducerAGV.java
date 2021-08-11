@@ -67,7 +67,7 @@ public class ProducerAGV {
                 agv.RawInputMeasurement2 = rand.nextInt(500);
                 agv.RawInputMeasurement3 = rand.nextInt(10000);
                 agv.Id = rand.nextInt(2);
-                agv.TimestampMilliseconds = rand.nextInt(86400); //getRandomYearMillisecond(minDate, maxDate);
+                agv.TimestampSeconds = rand.nextInt(86400); //getRandomYearMillisecond(minDate, maxDate);
                 
                 agv.CycleCounterOk = ++generalCounter;
 
@@ -111,7 +111,7 @@ public class ProducerAGV {
                 agv.RawInputMeasurement2 = rand.nextInt(500);
                 agv.RawInputMeasurement3 = rand.nextInt(10000);
                 agv.Id = rand.nextInt(2);
-                agv.TimestampMilliseconds = rand.nextInt(86400); //getRandomYearMillisecond(minDate, maxDate);
+                agv.TimestampSeconds = rand.nextInt(86400); //getRandomYearMillisecond(minDate, maxDate);
                 agv.CycleCounterOk = ++generalCounter;
 
 //                printObjectAsJson(agv);
