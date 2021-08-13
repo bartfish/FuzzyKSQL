@@ -1,4 +1,4 @@
-# Environment setuo
+# Environment setup
 
 1. 
 2.
