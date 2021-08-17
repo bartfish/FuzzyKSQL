@@ -1,5 +1,17 @@
 # FuzzyKSQL
 Data Agnostic library which allows to extend the default KSQL language with fuzzy operations.
+Implemented elements are based on the mathematical functions: 
+ * triangular
+ * trapezoidal
+ * Gaussian
+
+# List of contents
+0. [Introduction](this file)
+1. [Setup and installation](./Docs/1_Setup.md)
+2. [Mathematical background](./Docs/2_MathematicalBackground.md)
+3. [Architecture of the proposed solution](./Docs/3_Architecture.md)
+4. [Review of the implemented methods](./Docs/4_ReviewOfMethods.md)
+5. [Exemplary queries](./Docs/5_QueriesExamples.md)
 
 # Environment details
 
@@ -13,4 +25,6 @@ Data Agnostic library which allows to extend the default KSQL language with fuzz
 * AGVProducer - data producer. Simulator which generates 2 independent streams of data. The data payloads are based on the Autonomously Guided Vehicles - since some of the parameters may seem odd.
 
 * Script files - files concerning the environment setup as well as the list of tested queries.
+
+
 

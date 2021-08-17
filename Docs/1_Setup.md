@@ -74,5 +74,4 @@ Timestamp INTEGER) WITH (KAFKA_TOPIC='AGV_2_DEVICE', VALUE_FORMAT='JSON_SR');
 
 ```
 
-
 9. Have fun!
