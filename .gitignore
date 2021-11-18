@@ -2,29 +2,10 @@
 
 .idea/
 ./target
-Producer/target/
-UdfsManager/target/
-UDFsManager/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
-UDFsManager/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
-UDFsManager/target/classes/pl/bartryb/MultiplyUdf.class
-UDFsManager/target/UdfsManager-1.0-SNAPSHOT.jar
-UDFsManager/target/UdfsManager-1.0-SNAPSHOT-jar-with-dependencies.jar
+Producers/Producer/target/*
+
 *.jar
-FuzzyProject/target/classes/com/fuzzyproject/FuzzyFiltering.class
-FuzzyProject/target/classes/com/fuzzyproject/Multiply.class
-FuzzyProject/target/maven-archiver/pom.properties
-FuzzyProject/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
-FuzzyProject/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
-FuzzyProject/target/maven-archiver/pom.properties
-FuzzyProject/target/
-FuzzyProject/target/maven-archiver/pom.properties
-AGVProducer/target/classes/pl/bartryb/producer/Main.class
-AGVProducer/target/classes/pl/bartryb/producer/ProducerAGV.class
-AGVProducer/target/classes/pl/bartryb/producer/ProducerAGV$1.class
-AGVProducer/target/classes/pl/bartryb/producer/ProducerAGV$2.class
-AGVProducer/target/classes/pl/bartryb/producer/configs/ProducerConfig.class
-AGVProducer/target/classes/pl/bartryb/producer/models/AutonomousGuidedVehicle.class
-AGVProducer/target/classes/pl/bartryb/producer/models/AutonomousGuidedVehicleOther.class
+Producers/AGVProducer/target/*
 
 ./AGVProducer/target/
 */target/**
