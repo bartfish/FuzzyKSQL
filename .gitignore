@@ -1,10 +1,14 @@
 /extensions
+/FuzzyProject/bin/target
 
 .idea/
 ./target
 Producers/Producer/target/*
 
 *.jar
+*.class
+*.iml
+pom.xml
 Producers/AGVProducer/target/*
 
 ./AGVProducer/target/
