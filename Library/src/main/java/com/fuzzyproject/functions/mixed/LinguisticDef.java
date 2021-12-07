@@ -16,7 +16,6 @@ public class LinguisticDef {
         HashMap<String, String> matchedLinguistic = new HashMap<>();
 
         for (int i=0; i<linguisticElements.length; i++) {
-//            System.out.println(linguisticElements[i]);
             String[] matched = linguisticElements[i].split(":");
             matchedLinguistic.put(matched[0], matched[1]); // key: low, value: "TRIA;10;20;30
         }

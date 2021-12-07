@@ -56,10 +56,7 @@ public class FJoin {
             startX = leftSide2;
             endX = rightSide1;
         }
-
-
-//        System.out.println("value1e: " + value1 + " leftSide1: " + leftSide1 + " rightSide1: " + rightSide1);
-//        System.out.println("value2e: " + value2 + " leftSide2: " + leftSide2 + " rightSide2: " + rightSide2);
+        
         final int multiplicationFactor = 1000;
 
         Double startXx = startX * multiplicationFactor;

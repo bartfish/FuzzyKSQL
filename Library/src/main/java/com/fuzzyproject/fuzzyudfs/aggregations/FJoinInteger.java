@@ -42,9 +42,6 @@ public class FJoinInteger {
         Integer rightSide2 = value2 + spreadValue2;
         String triangularDefinition2 = "TRIA:" + leftSide2 + ";" + value2 + ";" + rightSide2;
 
-        System.out.println(triangularDefinition1);
-        System.out.println(triangularDefinition2);
-
         // check if triangular functions meet anywhere
         List<Double> intersectionValues = new ArrayList<Double>();
 
