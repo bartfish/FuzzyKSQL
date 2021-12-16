@@ -9,14 +9,11 @@ public class FAnd {
 
     @Udf(description = "Overriden AND operator - list of at least 2 booleans as parameters")
     public static Boolean FAnd(@UdfParameter(value = "boolean elements", description = "array of elements") final Boolean... elements) {
-
         for (Boolean element : elements) {
             if (!element) {
                 return false;
             }
         }
-
         return true;
     }
-
 }

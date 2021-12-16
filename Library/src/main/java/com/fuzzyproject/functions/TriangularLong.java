@@ -6,10 +6,6 @@ public class TriangularLong {
     // "TF:0.5;12;4,xValue"
     public static double TriangularFunction(Long left, Long middle, Long right, Long xValue) {
 
-        if (xValue <= left) {
-            return 0;
-        }
-
         if (xValue > left && xValue <= middle) {
             double nominator = xValue - left;
             double denominator = middle - left;
@@ -24,12 +20,6 @@ public class TriangularLong {
             return nominator/denominator;
         }
 
-        if (xValue >= right) {
-            return 0;
-        }
-
         return 0;
-
     }
-
 }

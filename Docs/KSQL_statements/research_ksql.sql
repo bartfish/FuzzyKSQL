@@ -8,7 +8,6 @@ SELECT
     AROUND_TRIANGULAR('LET', w.CumulativeEnergyConsumption1, 1000, 5000, 4500)AS MEMBERSHIP_DEGREE
 FROM NEW_AGV_1_STREAM w WHERE (AROUND_TRIANGULAR('LET', w.CumulativeEnergyConsumption1, 1000, 5000, 4500) > 0.8) 
 EMIT CHANGES; -- OK
--- select * from AGV_1_STREAM_WU w WHERE (AROUND_TRIANGULAR('CONST', w.TRACTION) > 0.6) EMIT CHANGES; -- TO BE IMPLEMENTED AND TESTED
 
 -- AROUND_TRAPEZ
 select ID as MACHINE_ID, w.CumulativeEnergyConsumption1, w.CumulativeEnergyConsumption2 from NEW_AGV_1_STREAM w 

@@ -14,7 +14,6 @@ public class FAnd_Norm {
         // find the minimum of the given values and return it
         Double minElement = elements[0];
         for (Double element : elements) {
-//            System.out.println(element);
             if (minElement > element) {
                 minElement = element;
             }

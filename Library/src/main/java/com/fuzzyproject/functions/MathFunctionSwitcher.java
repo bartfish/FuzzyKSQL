@@ -26,10 +26,8 @@ public class MathFunctionSwitcher {
 
     // AT THE END ADDED THE FUZZY_PARAMETER - VALUE FROM 0 TO 1
 
-
     // CREATING MULTIPLE AREAS (LINGUISTIC ONES)
     // "{LOW;T;0;10;30;40;}/{NORMAL;T;45;55;60;70;}/{HIGH;T;65;75;90;95};(50);
-
 
 
     public static double FunctionSwitch(String definedPayload) {
@@ -37,8 +35,6 @@ public class MathFunctionSwitcher {
         // SPLIT THE WHOLE PAYLOAD INTO THE ARRAY BY ;
         String data = definedPayload;
         String[] elements = data.split((";"));
-
-//        System.out.println(elements.length);
         
         List<Double> arrOfVAlues = new ArrayList<>();
 
@@ -51,39 +47,17 @@ public class MathFunctionSwitcher {
 
         switch(elements[0]) {
             case "TRIA":
-            {
-//                System.out.println(arrOfVAlues.get(0) + " " + arrOfVAlues.get(1) + " " + arrOfVAlues.get(2) + " " + arrOfVAlues.get(3));
                 return Triangular.TriangularFunction(arrOfVAlues.get(0), arrOfVAlues.get(1), arrOfVAlues.get(2), arrOfVAlues.get(3));
-            }
-
             case "GAUS":
-            {
-//                System.out.println(arrOfVAlues.get(0) + " " + arrOfVAlues.get(1) + " " + arrOfVAlues.get(2));
                 return Gauss.GaussianFunction(arrOfVAlues.get(0), arrOfVAlues.get(1), arrOfVAlues.get(2));
-            }
-
             case "TR_F":
-            {
-//                System.out.println(arrOfVAlues.get(0) + " " + arrOfVAlues.get(1) + " " + arrOfVAlues.get(2) + " " + arrOfVAlues.get(3) + " " + arrOfVAlues.get(4));
                 return Trapezoidal.TrapezoidalFunction(arrOfVAlues.get(0), arrOfVAlues.get(1), arrOfVAlues.get(2), arrOfVAlues.get(3), arrOfVAlues.get(4));
-            }
-
             case "TR_L":
-            {
-//                System.out.println(arrOfVAlues.get(0) + " " + arrOfVAlues.get(1) + " " + arrOfVAlues.get(2));
                 return Trapezoidal.TrapezoidalLeft(arrOfVAlues.get(0),arrOfVAlues.get(1),arrOfVAlues.get(2));
-            }
-
             case "TR_R":
-            {
-//                System.out.println(arrOfVAlues.get(0) + " " + arrOfVAlues.get(1) + " " + arrOfVAlues.get(2));
                 return Trapezoidal.TrapezoidalRight(arrOfVAlues.get(0),arrOfVAlues.get(1),arrOfVAlues.get(2));
-            }
-
             case "MIXE":
-            {
                 return 0;
-            }
             default:
                 throw new IllegalStateException("Unexpected value: " + elements[0]);
         }
@@ -102,8 +76,6 @@ public class MathFunctionSwitcher {
         String data = definedPayload;
         String[] elements = data.split((";"));
 
-//        System.out.println(elements.length);
-
         List<Double> arrOfVAlues = new ArrayList<>();
 
         if (elements[0] != "MIXE") {
@@ -115,39 +87,17 @@ public class MathFunctionSwitcher {
 
         switch(elements[0]) {
             case "TRIA":
-            {
-//                System.out.println(arrOfVAlues.get(0) + " " + arrOfVAlues.get(1) + " " + arrOfVAlues.get(2) + " " + arrOfVAlues.get(3));
                 return Triangular.TriangularFunction(arrOfVAlues.get(0), arrOfVAlues.get(1), arrOfVAlues.get(2), searchedValue);
-            }
-
             case "GAUS":
-            {
-//                System.out.println(arrOfVAlues.get(0) + " " + arrOfVAlues.get(1) + " " + arrOfVAlues.get(2));
                 return Gauss.GaussianFunction(arrOfVAlues.get(0), arrOfVAlues.get(1), searchedValue);
-            }
-
             case "TR_F":
-            {
-//                System.out.println(arrOfVAlues.get(0) + " " + arrOfVAlues.get(1) + " " + arrOfVAlues.get(2) + " " + arrOfVAlues.get(3) + " " + arrOfVAlues.get(4));
                 return Trapezoidal.TrapezoidalFunction(arrOfVAlues.get(0), arrOfVAlues.get(1), arrOfVAlues.get(2), arrOfVAlues.get(3), searchedValue);
-            }
-
             case "TR_L":
-            {
-//                System.out.println(arrOfVAlues.get(0) + " " + arrOfVAlues.get(1) + " " + arrOfVAlues.get(2));
                 return Trapezoidal.TrapezoidalLeft(arrOfVAlues.get(0),arrOfVAlues.get(1), searchedValue);
-            }
-
             case "TR_R":
-            {
-//                System.out.println(arrOfVAlues.get(0) + " " + arrOfVAlues.get(1) + " " + arrOfVAlues.get(2));
                 return Trapezoidal.TrapezoidalRight(arrOfVAlues.get(0),arrOfVAlues.get(1), searchedValue);
-            }
-
             case "MIXE":
-            {
                 return 0;
-            }
             default:
                 throw new IllegalStateException("Unexpected value: " + elements[0]);
         }

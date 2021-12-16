@@ -9,7 +9,6 @@ public class FOr {
 
     @Udf(description = "Overriden OR operator - list of at least 2 booleans as parameters")
     public static Boolean FOr(@UdfParameter(value = "boolean elements", description = "array of elements") final Boolean... elements) {
-
         Boolean areAnyTrueOnes = false;
         for (Boolean element : elements) {
             if (element) {
@@ -17,7 +16,6 @@ public class FOr {
                 break;
             }
         }
-
         return areAnyTrueOnes;
     }
 

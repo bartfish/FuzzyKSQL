@@ -14,7 +14,7 @@ public class AssignLing {
     @Udf(description = "Check whether value fits linguistic match defined in arguments")
     public static String AssignLing(
             @UdfParameter(value = "expression", description = "exemplary expression: TRIA;LEFT;MIDDLE;RIGHT") final String expression,
-            @UdfParameter(value = "seachedValue", description = "searchedValue") final Double searchedValue
+            @UdfParameter(value = "searchedValue", description = "searchedValue") final Double searchedValue
     ) {
         Map.Entry<String, Double> returnedEntry = AssignLinguistic.assignLinguisticElement(expression, searchedValue);
         return returnedEntry.getKey();

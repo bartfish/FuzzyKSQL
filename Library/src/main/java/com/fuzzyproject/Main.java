@@ -1,6 +1,8 @@
 package com.fuzzyproject;
 
 import com.fuzzyproject.fuzzyudfs.aggregations.FJoinInteger;
+import com.fuzzyproject.fuzzyudfs.assign.AssignLing;
+import com.fuzzyproject.fuzzyudfs.assign.AssignLingMDg;
 
 public class Main {
 
